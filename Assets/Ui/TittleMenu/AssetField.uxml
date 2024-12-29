@@ -1,0 +1,6 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:VisualElement name="Continer" style="flex-grow: 1; background-color: rgba(0, 115, 34, 0); background-image: url(&quot;project://database/Assets/Ui/TittleMenu/img/titleImg.jpg?fileID=2800000&amp;guid=0b4286023a5c10f4799ab82234db19cd&amp;type=3#titleImg&quot;);">
+        <engine:Label text="Ether-no" style="font-size: 155px; -unity-font-definition: url(&quot;project://database/Assets/Ui/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&amp;guid=a4a9f921300dd02488d414db96fb18cd&amp;type=3#NotInter-Regular&quot;); -unity-font-style: bold; -unity-text-align: middle-left; -unity-text-outline-color: rgba(255, 229, 33, 0); color: rgb(255, 229, 33);" />
+        <engine:Button text="play" name="Play" parse-escape-sequences="false" style="position: absolute; left: 20px; top: 306px; width: 375px; height: 84px; bottom: 687px; right: auto; font-size: 43px;" />
+    </engine:VisualElement>
+</engine:UXML>

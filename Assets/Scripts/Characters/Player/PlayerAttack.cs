@@ -4,7 +4,13 @@ using UnityEngine.InputSystem;
 public class PlayerAttack : MonoBehaviour
 {
     public Animator animator; // Referencia al Animator
+    private PlayerStats playerStats;
 
+    void Start()
+    {
+        playerStats = GetComponent<PlayerStats>();
+        
+    }
     /* Método: PerformAttack.
      * Parámetros:
      * @param context: Contexto del evento de ataque del Input System.
@@ -33,7 +39,8 @@ public class PlayerAttack : MonoBehaviour
     {
         if (context.performed)
         {
-            // Activar animación de escudo
+            // Activar animación de escudo            
+            playerStats.UseMana(5);
             animator.SetBool("isSheltering", true);
         }
         else if (context.canceled)
@@ -54,11 +61,14 @@ public class PlayerAttack : MonoBehaviour
         {
             // Activar animación de disparo (Cross)
             animator.SetBool("isShooting", true);
+            playerStats.UseMana(10);
         }
         else if (context.canceled)
         {
             // Desactivar animación de disparo
             animator.SetBool("isShooting", false);
+
+
         }
     }
 }

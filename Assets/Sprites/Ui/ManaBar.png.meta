@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f281035b05b9cba4eb0c5220a5899592
+guid: 948cde7c382e67b499b26fa3c14ef6f0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2669142961033076756
-    second: Clouds_0
+      213: -6095778582064710142
+    second: ManaBar_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Clouds_0
+      name: ManaBar_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 2149
-        height: 231
+        x: 5
+        y: 3
+        width: 1019
+        height: 186
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4106c1f9163ba0520800000000000000
-      internalID: 2669142961033076756
+      spriteID: 20e399a2da1776ba0800000000000000
+      internalID: -6095778582064710142
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Clouds_0: 2669142961033076756
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

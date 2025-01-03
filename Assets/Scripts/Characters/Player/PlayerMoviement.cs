@@ -6,9 +6,9 @@ public class PlayerMoviement : MonoBehaviour
     public Rigidbody2D rb;
     public Transform groundCheck;
     public LayerMask groundLayer;
-    public Animator animator; // Referencia al Animator
+    public Animator animator; 
 
-    private float horizontal;
+    public float horizontal;
     private float vertical; // Para capturar el movimiento vertical
     private bool isFacingRight = true; // Dirección del personaje
     private bool isCrouched = false; // Estado de agachado
@@ -65,8 +65,7 @@ public class PlayerMoviement : MonoBehaviour
          * Parámetros: Ninguno.
          * Descripción: Aplica la física del movimiento del jugador y bloquea el movimiento horizontal si está agachado.
          */
-
-        if (!isCrouched) // No moverse horizontalmente si está agachado
+        if (!isCrouched)
         {
             rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocityY);
         }
@@ -82,8 +81,6 @@ public class PlayerMoviement : MonoBehaviour
         Vector2 input = context.ReadValue<Vector2>();
         horizontal = input.x;
         vertical = input.y;
-
-        // Manejo del salto
         if (vertical > 0 && IsGrounded())
         {
             rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpingPower);

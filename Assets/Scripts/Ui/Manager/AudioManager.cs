@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public class AudioManager : MonoBehaviour
 {
     [SerializeField] private AudioSource sfxAudioSource, musicAudioSource;
@@ -12,42 +13,77 @@ public class AudioManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
+            return;
         }
-        else
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        // Validar que los AudioSources están asignados
+        if (sfxAudioSource == null || musicAudioSource == null)
         {
-            Instance = this;
-            DontDestroyOnLoad(this);
+            Debug.LogError("AudioManager: Uno o más AudioSource no están asignados en el Inspector.");
         }
     }
 
     public void PlaySound(AudioClip clip)
     {
-        sfxAudioSource.PlayOneShot(clip);
+        if (sfxAudioSource != null && clip != null)
+        {
+            sfxAudioSource.PlayOneShot(clip);
+        }
+        else if (clip == null)
+        {
+            Debug.LogWarning("AudioManager: El AudioClip pasado a PlaySound es null.");
+        }
     }
 
     public void PlayMusic(AudioClip clip)
     {
-        if (musicAudioSource.isPlaying)
+        if (musicAudioSource != null && clip != null)
         {
-            musicAudioSource.Stop();
+            if (musicAudioSource.isPlaying)
+            {
+                musicAudioSource.Stop();
+            }
+            musicAudioSource.clip = clip;
+            musicAudioSource.Play();
+            isMusicPlaying = true;
         }
-        musicAudioSource.clip = clip;
-        musicAudioSource.Play();
-        isMusicPlaying = true;
+        else if (clip == null)
+        {
+            Debug.LogWarning("AudioManager: El AudioClip pasado a PlayMusic es null.");
+        }
     }
 
     public void StopMusic()
     {
-        if (musicAudioSource.isPlaying)
+        if (musicAudioSource != null && musicAudioSource.isPlaying)
         {
             musicAudioSource.Stop();
+            isMusicPlaying = false;
         }
-        isMusicPlaying = false;
     }
 
     public bool GetIsMusicPlaying()
     {
         return isMusicPlaying;
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        if (musicAudioSource != null)
+        {
+            musicAudioSource.volume = Mathf.Clamp01(volume);
+        }
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        if (sfxAudioSource != null)
+        {
+            sfxAudioSource.volume = Mathf.Clamp01(volume);
+        }
     }
 }

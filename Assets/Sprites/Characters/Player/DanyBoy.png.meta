@@ -314,8 +314,8 @@ TextureImporter:
         y: 388
         width: 36
         height: 47
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.47385323, y: 0.5954538}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -508,12 +508,12 @@ TextureImporter:
       name: Kick_0
       rect:
         serializedVersion: 2
-        x: 5
+        x: 6
         y: 241
         width: 31
         height: 44
-      alignment: 9
-      pivot: {x: -0.017081246, y: 0.7045774}
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -534,8 +534,8 @@ TextureImporter:
         y: 241
         width: 55
         height: 44
-      alignment: 9
-      pivot: {x: -0.009627672, y: 0.7406797}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -687,7 +687,7 @@ TextureImporter:
         x: 66
         y: 88
         width: 36
-        height: 69
+        height: 65
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -754,8 +754,8 @@ TextureImporter:
         y: 228
         width: 38
         height: 65
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -776,8 +776,8 @@ TextureImporter:
         y: 228
         width: 30
         height: 63
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

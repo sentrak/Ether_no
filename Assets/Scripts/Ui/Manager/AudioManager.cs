@@ -1,37 +1,63 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] private AudioSource sfxAudioSource, musicAudioSource;
-    private bool isMusicPlaying;
+    public static AudioManager Instance { get; private set; } // Singleton Instance
 
-    public static AudioManager Instance { get; private set; }
+    [Header("Audio Sources")]
+    [SerializeField] private AudioSource musicSource; // AudioSource para música
+    [SerializeField] private AudioSource sfxSource;   // AudioSource para efectos de sonido
 
     private void Awake()
     {
+        // Configuración del Singleton
         if (Instance != null && Instance != this)
         {
-            Destroy(gameObject);
+            Destroy(gameObject); // Si ya existe una instancia, destruye esta
             return;
         }
 
-        Instance = this;
+        Instance = this; 
         DontDestroyOnLoad(gameObject);
-
-        // Validar que los AudioSources están asignados
-        if (sfxAudioSource == null || musicAudioSource == null)
+        //Validación de los Sources
+        if (sfxSource == null )
         {
-            Debug.LogError("AudioManager: Uno o más AudioSource no están asignados en el Inspector.");
+            Debug.LogError("sfxSource no está asignado en el Inspector.");
+        }
+         if (musicSource == null)
+        {
+            Debug.LogError("musicSource no está asignado en el Inspector.");
+
+        }
+    }
+
+    public void PlayMusic(AudioClip clip)
+    {
+        if (musicSource != null)
+        {
+            musicSource.clip = clip;
+            musicSource.loop = true; // Música en bucle
+            musicSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("Music Source no está asignado en AudioManager.");
+        }
+    }
+
+    public void StopMusic()
+    {
+        if (musicSource != null && musicSource.isPlaying)
+        {
+            musicSource.Stop();
         }
     }
 
     public void PlaySound(AudioClip clip)
     {
-        if (sfxAudioSource != null && clip != null)
+        if (sfxSource != null && clip != null)
         {
-            sfxAudioSource.PlayOneShot(clip);
+            sfxSource.PlayOneShot(clip);
         }
         else if (clip == null)
         {
@@ -39,51 +65,20 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayMusic(AudioClip clip)
-    {
-        if (musicAudioSource != null && clip != null)
-        {
-            if (musicAudioSource.isPlaying)
-            {
-                musicAudioSource.Stop();
-            }
-            musicAudioSource.clip = clip;
-            musicAudioSource.Play();
-            isMusicPlaying = true;
-        }
-        else if (clip == null)
-        {
-            Debug.LogWarning("AudioManager: El AudioClip pasado a PlayMusic es null.");
-        }
-    }
-
-    public void StopMusic()
-    {
-        if (musicAudioSource != null && musicAudioSource.isPlaying)
-        {
-            musicAudioSource.Stop();
-            isMusicPlaying = false;
-        }
-    }
-
-    public bool GetIsMusicPlaying()
-    {
-        return isMusicPlaying;
-    }
-
     public void SetMusicVolume(float volume)
     {
-        if (musicAudioSource != null)
+        if (musicSource != null)
         {
-            musicAudioSource.volume = Mathf.Clamp01(volume);
+            musicSource.volume = Mathf.Clamp01(volume);
         }
     }
-
     public void SetSFXVolume(float volume)
     {
-        if (sfxAudioSource != null)
+        if (sfxSource != null)
         {
-            sfxAudioSource.volume = Mathf.Clamp01(volume);
+            sfxSource.volume = Mathf.Clamp01(volume);
         }
     }
-}
+    }
+
+

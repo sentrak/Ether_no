@@ -3,13 +3,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
 {
+    [Header("Audio Sources")]
+    [SerializeField] private AudioClip kick,punch,shild,cross;
     public Animator animator; // Referencia al Animator
     private PlayerStats playerStats;
 
     void Start()
     {
         playerStats = GetComponent<PlayerStats>();
-        
+
     }
     /* Método: PerformAttack.
      * Parámetros:
@@ -20,6 +22,8 @@ public class PlayerAttack : MonoBehaviour
     {
         if (context.performed)
         {
+            AudioManager.Instance.PlaySound(punch);
+
             // Activar animación de ataque
             animator.SetBool("isAttacking", true);
         }
@@ -39,6 +43,8 @@ public class PlayerAttack : MonoBehaviour
     {
         if (context.performed)
         {
+            AudioManager.Instance.PlaySound(shild);
+
             // Activar animación de escudo            
             playerStats.UseMana(5);
             animator.SetBool("isSheltering", true);
@@ -59,6 +65,8 @@ public class PlayerAttack : MonoBehaviour
     {
         if (context.performed)
         {
+            AudioManager.Instance.PlaySound(cross);
+
             // Activar animación de disparo (Cross)
             animator.SetBool("isShooting", true);
             playerStats.UseMana(10);

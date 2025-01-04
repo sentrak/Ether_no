@@ -1,12 +1,16 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
+                [Header("Audio Sources")]
+    [SerializeField] private AudioClip death;
     [Header("Player Stats")]
     [SerializeField] private int maxHealth = 100;
     [SerializeField] private int maxMana = 50;
+
     public float health;
     public float mana;
     public float inmunityTime;
@@ -44,7 +48,11 @@ public class PlayerStats : MonoBehaviour
         }
         else if (health <= 0)
         {
+            AudioManager.Instance.PlaySound(death);
             health = 0;
+            SceneManager.LoadScene("05 game over");
+           
+
         }
         if (mana > maxMana)
         {

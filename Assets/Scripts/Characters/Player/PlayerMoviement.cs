@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerMoviement : MonoBehaviour
 {
+      [Header("Audio Sources")]
+        [SerializeField] private AudioClip jump;
     public Rigidbody2D rb;
     public Transform groundCheck;
     public LayerMask groundLayer;
@@ -83,6 +85,8 @@ public class PlayerMoviement : MonoBehaviour
         vertical = input.y;
         if (vertical > 0 && IsGrounded())
         {
+            AudioManager.Instance.PlaySound(jump);
+
             rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpingPower);
         }
     }

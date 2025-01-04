@@ -17,14 +17,14 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        Instance = this; 
+        Instance = this;
         DontDestroyOnLoad(gameObject);
         //Validación de los Sources
-        if (sfxSource == null )
+        if (sfxSource == null)
         {
             Debug.LogError("sfxSource no está asignado en el Inspector.");
         }
-         if (musicSource == null)
+        if (musicSource == null)
         {
             Debug.LogError("musicSource no está asignado en el Inspector.");
 
@@ -64,7 +64,13 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("AudioManager: El AudioClip pasado a PlaySound es null.");
         }
     }
-
+    public void StopSound()
+    {
+        if (sfxSource != null && sfxSource.isPlaying)
+        {
+            sfxSource.Stop();
+        }
+    }
     public void SetMusicVolume(float volume)
     {
         if (musicSource != null)
@@ -79,6 +85,6 @@ public class AudioManager : MonoBehaviour
             sfxSource.volume = Mathf.Clamp01(volume);
         }
     }
-    }
+}
 
 

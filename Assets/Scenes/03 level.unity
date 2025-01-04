@@ -1628,6 +1628,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amplitude: 0.1
   speed: 2
+--- !u!1 &142662421
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 142662422}
+  m_Layer: 0
+  m_Name: Tps
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &142662422
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142662421}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.9525716, y: 3.479777, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &239511246
 GameObject:
   m_ObjectHideFlags: 0
@@ -4930,9 +4961,9 @@ GameObject:
   - component: {fileID: 1170356474}
   - component: {fileID: 1170356467}
   - component: {fileID: 1170356473}
-  - component: {fileID: 1170356472}
   - component: {fileID: 1170356471}
   - component: {fileID: 1170356476}
+  - component: {fileID: 1170356472}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -5045,11 +5076,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 275a896bb163f0b4693b48ce82b5e36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kick: {fileID: 8300000, guid: f7ebd2db5300a2646b9e6f0154e07fb9, type: 3}
   punch: {fileID: 8300000, guid: 1808d9ea8fe23fb45b50b7d7a8cec8ec, type: 3}
   shild: {fileID: 8300000, guid: 6ca7c60b56dc28f4e8c1928c892aacc4, type: 3}
   cross: {fileID: 8300000, guid: a885bbb5736fa544c8418cf74fc00a5f, type: 3}
   animator: {fileID: 1170356467}
+  crossManaCost: 10
+  shildManaCost: 5
 --- !u!114 &1170356472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5070,6 +5102,7 @@ MonoBehaviour:
     m_Bits: 64
   animator: {fileID: 1170356467}
   horizontal: 0
+  vertical: 0
   speed: 8
   jumpingPower: 8
 --- !u!114 &1170356473
@@ -5225,6 +5258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   death: {fileID: 8300000, guid: 20c6549ce83d2b34db558d5d5d9c6b98, type: 3}
+  getHit: {fileID: 8300000, guid: 89037c2479b54e34bbc3bdff99583ab8, type: 3}
   maxHealth: 100
   maxMana: 50
   health: 100
@@ -19087,3 +19121,4 @@ SceneRoots:
   - {fileID: 1907491116}
   - {fileID: 489939653}
   - {fileID: 239511249}
+  - {fileID: 142662422}

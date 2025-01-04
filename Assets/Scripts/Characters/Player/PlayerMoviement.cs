@@ -1,80 +1,68 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
 public class PlayerMoviement : MonoBehaviour
 {
-      [Header("Audio Sources")]
-        [SerializeField] private AudioClip jump;
-    public Rigidbody2D rb;
-    public Transform groundCheck;
-    public LayerMask groundLayer;
-    public Animator animator; 
+    [Header("Audio Sources")]
+    [SerializeField] private AudioClip jump; // Clip de audio para el salto
 
-    public float horizontal;
-    private float vertical; // Para capturar el movimiento vertical
-    private bool isFacingRight = true; // Dirección del personaje
-    private bool isCrouched = false; // Estado de agachado
-    private bool isRunning = false; // Estado de correr
+    [Header("Player Components")]
+    public Rigidbody2D rb; // Componente Rigidbody2D del jugador para manejar la física
+    public Transform groundCheck; // Transform usado para verificar si el jugador está tocando el suelo
+    public LayerMask groundLayer; // Capa que define qué objetos se consideran "suelo"
+    public Animator animator; // Referencia al Animator para manejar las animaciones del jugador
 
-    [SerializeField] private float speed = 8f;
-    [SerializeField] private float jumpingPower = 16f;
+    [Header("Player Variables")]
+    public float horizontal; // Almacena el valor del movimiento horizontal del jugador
+    public float vertical; // Almacena el valor del movimiento vertical del jugador
+    private bool isFacingRight = true; // Indica si el jugador está mirando hacia la derecha
+    private bool isCrouched = false; // Indica si el jugador está agachado
+    private bool isRunning = false; // Indica si el jugador está corriendo
 
+    [SerializeField] private float speed = 8f; // Velocidad de movimiento horizontal del jugador
+    [SerializeField] private float jumpingPower = 16f; // Fuerza del salto del jugador
+
+    /*
+     * Método: Update.
+     * Parámetros: Ninguno.
+     * Descripción: Controla el flip del personaje, actualiza los parámetros del Animator y gestiona el estado de agachado, salto y correr.
+     */
     void Update()
     {
-        /* Método: Update.
-         * Parámetros: Ninguno.
-         * Descripción: Controla el flip del personaje, actualiza los parámetros del Animator y gestiona el estado de agachado, salto y correr.
-         */
-
-        // Controlar el flip del personaje
-        if (!isFacingRight && horizontal > 0f)
-        {
-            Flip();
-        }
-        else if (isFacingRight && horizontal < 0f)
-        {
-            Flip();
-        }
-
-        // Actualizar parámetros del Animator
-        isRunning = Mathf.Abs(horizontal) > 0; // El personaje está corriendo si el movimiento horizontal es distinto de 0
-        animator.SetBool("isRunning", isRunning); // Estado de correr
-        animator.SetBool("isJumping", !IsGrounded()); // Estado de salto
-        animator.SetBool("isGrounded", IsGrounded()); // Contacto con el suelo
-
-        // Diferenciar entre subida y caída
-        if (rb.linearVelocityY > 0) // Movimiento hacia arriba
+        if (!isFacingRight && horizontal > 0f) Flip();
+        else if (isFacingRight && horizontal < 0f) Flip();
+        isRunning = Mathf.Abs(horizontal) > 0;
+        animator.SetBool("isRunning", isRunning);
+        animator.SetBool("isJumping", !IsGrounded());
+        animator.SetBool("isGrounded", IsGrounded());
+        if (rb.linearVelocity.y > 0)
         {
             animator.SetBool("isFalling", false);
         }
-        else if (rb.linearVelocityY < 0 && !IsGrounded()) // Movimiento hacia abajo y no en el suelo
+        else if (rb.linearVelocity.y < 0 && !IsGrounded())
         {
             animator.SetBool("isFalling", true);
         }
-        else // En el suelo o sin movimiento vertical
+        else
         {
             animator.SetBool("isFalling", false);
         }
-
-        // Activar o desactivar el estado de "isCrounched"
-        isCrouched = vertical < 0 && IsGrounded();
-        animator.SetBool("isCrounched", isCrouched);
     }
 
+    /*
+     * Método: FixedUpdate.
+     * Parámetros: Ninguno.
+     * Descripción: Aplica la física del movimiento del jugador y bloquea el movimiento horizontal si está agachado.
+     */
     private void FixedUpdate()
     {
-        /* Método: FixedUpdate.
-         * Parámetros: Ninguno.
-         * Descripción: Aplica la física del movimiento del jugador y bloquea el movimiento horizontal si está agachado.
-         */
         if (!isCrouched)
         {
-            rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocityY);
+            rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocity.y);
         }
     }
 
-    /* Método: Move.
-     * Parámetros:
+    /*
+     * Método: Move.
      * @param context: Contexto del evento de movimiento del Input System.
      * Descripción: Captura el valor del movimiento horizontal y vertical desde el Input System y maneja el salto.
      */
@@ -83,17 +71,29 @@ public class PlayerMoviement : MonoBehaviour
         Vector2 input = context.ReadValue<Vector2>();
         horizontal = input.x;
         vertical = input.y;
+        //jump
         if (vertical > 0 && IsGrounded())
         {
             AudioManager.Instance.PlaySound(jump);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+        }
 
-            rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpingPower);
+        //Crounch
+        if (vertical < 0 && IsGrounded())
+        {
+            horizontal = 0;
+            animator.SetBool("isCrounched", true);
+        }
+        else
+        {
+            animator.SetBool("isCrounched", false);
         }
     }
 
-    /* Método: Flip.
+    /*
+     * Método: Flip.
      * Parámetros: Ninguno.
-     * Descripción: Invierte la escala horizontal del jugador para reflejarlo hacia la dirección correcta.
+     * Descripción: Invierte la dirección del personaje en el eje X.
      */
     private void Flip()
     {
@@ -103,9 +103,10 @@ public class PlayerMoviement : MonoBehaviour
         transform.localScale = localScale;
     }
 
-    /* Método: IsGrounded.
+    /*
+     * Método: IsGrounded.
      * Parámetros: Ninguno.
-     * Descripción: Verifica si el jugador está en contacto con el suelo usando un OverlapCircle.
+     * Descripción: Verifica si el jugador está tocando el suelo usando un OverlapCircle.
      */
     private bool IsGrounded()
     {

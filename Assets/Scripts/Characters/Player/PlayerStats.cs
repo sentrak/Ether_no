@@ -26,11 +26,11 @@ public class PlayerStats : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private PlayerMoviement playerMoviement;
- /*
-     * Método: Start.
-     * Parámetros: Ninguno.
-     * Descripción: Inicializa las referencias necesarias y configura los valores iniciales de vida y maná.
-     */
+    /*
+        * Método: Start.
+        * Parámetros: Ninguno.
+        * Descripción: Inicializa las referencias necesarias y configura los valores iniciales de vida y maná.
+        */
     void Start()
     {
         playerMoviement = GetComponent<PlayerMoviement>();
@@ -73,11 +73,9 @@ public class PlayerStats : MonoBehaviour
         if (collision.CompareTag("Enemy") && !isInmune)
         {
             animator.SetTrigger("getHit");
-
             AudioManager.Instance.PlaySound(getHit);
             health -= 10;
             StartCoroutine(Inmunity());
-
             if (collision.transform.position.x > transform.position.x)
             {
                 rb.AddForce(new Vector2(-knockBackForceX, knockBackForceY), ForceMode2D.Force);
@@ -90,14 +88,24 @@ public class PlayerStats : MonoBehaviour
     }
 
     /*
-     * Método: heal.
+     * Método: RecoveryHeal.
      * Parámetros:
      * @param amount: Cantidad de vida a restaurar.
      * Descripción: Incrementa la vida del jugador.
      */
-    private void heal(int amount)
+    public void RecoveryHeal(int amount)
     {
         health = Mathf.Min(health + amount, maxHealth);
+    }
+    /*
+ * Método: Recovery.
+ * Parámetros:
+ * @param amount: Cantidad de mana a restaurar.
+ * Descripción: Incrementa el mana del jugador.
+ */
+    public void RecoveryMana(int amount)
+    {
+        mana = Mathf.Min(mana + amount, maxMana);
     }
 
     /*

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 public class PlayerMoviement : MonoBehaviour
 {
     [Header("Audio Sources")]
@@ -19,13 +20,11 @@ public class PlayerMoviement : MonoBehaviour
     private bool isRunning = false; // Indica si el jugador está corriendo
 
     [SerializeField] private float speed = 8f; // Velocidad de movimiento horizontal del jugador
-    [SerializeField] private float jumpingPower = 16f; // Fuerza del salto del jugador
+    [SerializeField] private float jumpingPower = 16f; // Fuerza del salto normal del jugador
+    [SerializeField] private float doubleJumpingPower = 24f; // Fuerza del salto alto para doble clic
+    [SerializeField] private float doubleClickTime = 0.3f; // Tiempo para detectar doble clic
+    private float lastClickTime = -1f; // Tiempo del último clic de salto
 
-    /*
-     * Método: Update.
-     * Parámetros: Ninguno.
-     * Descripción: Controla el flip del personaje, actualiza los parámetros del Animator y gestiona el estado de agachado, salto y correr.
-     */
     void Update()
     {
         if (!isFacingRight && horizontal > 0f) Flip();
@@ -48,11 +47,6 @@ public class PlayerMoviement : MonoBehaviour
         }
     }
 
-    /*
-     * Método: FixedUpdate.
-     * Parámetros: Ninguno.
-     * Descripción: Aplica la física del movimiento del jugador y bloquea el movimiento horizontal si está agachado.
-     */
     private void FixedUpdate()
     {
         if (!isCrouched)
@@ -61,24 +55,19 @@ public class PlayerMoviement : MonoBehaviour
         }
     }
 
-    /*
-     * Método: Move.
-     * @param context: Contexto del evento de movimiento del Input System.
-     * Descripción: Captura el valor del movimiento horizontal y vertical desde el Input System y maneja el salto.
-     */
     public void Move(InputAction.CallbackContext context)
     {
         Vector2 input = context.ReadValue<Vector2>();
         horizontal = input.x;
         vertical = input.y;
-        //jump
+
+        // Saltar
         if (vertical > 0 && IsGrounded())
         {
-            AudioManager.Instance.PlaySound(jump);
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+            HandleJump();
         }
 
-        //Crounch
+        // Crouch
         if (vertical < 0 && IsGrounded())
         {
             horizontal = 0;
@@ -90,11 +79,32 @@ public class PlayerMoviement : MonoBehaviour
         }
     }
 
-    /*
-     * Método: Flip.
-     * Parámetros: Ninguno.
-     * Descripción: Invierte la dirección del personaje en el eje X.
-     */
+    private void HandleJump()
+    {
+        float currentTime = Time.time;
+
+        // Verificar si el tiempo entre clics es menor que el tiempo para un doble clic
+        if (currentTime - lastClickTime <= doubleClickTime)
+        {
+            // Si es un doble clic, saltar más alto
+            Jump(doubleJumpingPower);
+            lastClickTime = -1f; // Reiniciar el tiempo
+        }
+        else
+        {
+            // Si no es doble clic, salto normal
+            Jump(jumpingPower);
+            lastClickTime = Time.time; // Guardar el tiempo del primer clic
+        }
+    }
+
+    private void Jump(float jumpForce)
+    {
+        // Aplicar la fuerza de salto
+        AudioManager.Instance.PlaySound(jump);
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+    }
+
     private void Flip()
     {
         isFacingRight = !isFacingRight;
@@ -103,11 +113,6 @@ public class PlayerMoviement : MonoBehaviour
         transform.localScale = localScale;
     }
 
-    /*
-     * Método: IsGrounded.
-     * Parámetros: Ninguno.
-     * Descripción: Verifica si el jugador está tocando el suelo usando un OverlapCircle.
-     */
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);

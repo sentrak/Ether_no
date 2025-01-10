@@ -131,4 +131,24 @@ public class PlayerStats : MonoBehaviour
     {
         mana = Mathf.Max(0, mana - amount);
     }
+
+    public void Die()
+    {
+        // Activar animación de muerte, no me estaba funcionando la animación de muerte
+        Debug.Log("Activando animación de la muerte con getHit");
+        animator.SetTrigger("getHit");
+
+        Debug.Log("Jugador ha muerto esta pasando por el código stats");
+        // Desactivar el movimiento del jugador
+
+        SceneManager.LoadScene("05 game over");
+        //playerMoviement.enabled = false;
+        //rb.linearVelocity = Vector2.zero; // Detener la física del jugador
+
+  
+
+        // Esperar la duración de la animación de muerte antes de cargar la escena
+        //StartCoroutine(WaitForDeathAnimation());
+    }
+
 }

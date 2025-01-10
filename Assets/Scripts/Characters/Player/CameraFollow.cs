@@ -21,20 +21,23 @@ public class CameraFollow : MonoBehaviour
             return;
         }
 
-
+        // Crear la posición deseada, manteniendo el offset original en X y Z
         Vector3 desiredPosition = player.position + offset;
 
-        
+        // Ajustar el offset en Y para que siempre esté centrado
+        desiredPosition.y = player.position.y + offset.y;
+
+        // Limitar la cámara a los límites definidos (si es necesario)
         if (minBounds != Vector2.zero && maxBounds != Vector2.zero)
         {
             desiredPosition.x = Mathf.Clamp(desiredPosition.x, minBounds.x, maxBounds.x);
             desiredPosition.y = Mathf.Clamp(desiredPosition.y, minBounds.y, maxBounds.y);
         }
 
-        // Suaviza el movimiento de la cámara
+        // Suavizar el movimiento de la cámara
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
 
-        // Actualiza la posición de la cámara
+        // Actualizar la posición de la cámara
         transform.position = smoothedPosition;
     }
 }

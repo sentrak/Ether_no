@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Enemy
+  - floor
+  - Spikes
   layers:
   - Default
   - TransparentFX
@@ -13,8 +15,8 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
-  - 
+  - Spikes
+  - Player
   - 
   - 
   - 
@@ -42,6 +44,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BackGround_0
+    uniqueID: 4179099889
+    locked: 0
+  - name: BackGround_1
+    uniqueID: 1054820969
+    locked: 0
   - name: BaseGround
     uniqueID: 761170929
     locked: 0
@@ -57,7 +65,10 @@ TagManager:
   - name: Props
     uniqueID: 2504459621
     locked: 0
-  - name: Player
+  - name: Spikes
+    uniqueID: 3821537053
+    locked: 0
+  - name: 
     uniqueID: 4102075353
     locked: 0
   m_RenderingLayers:

@@ -36,6 +36,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (context.performed)
         {
+            gameObject.tag = "Untagged";
             AudioManager.Instance.PlaySound(punch); 
             animator.SetTrigger("isAttacking"); 
             playerMoviement.horizontal = 0; 
@@ -44,6 +45,8 @@ public class PlayerAttack : MonoBehaviour
         else if (context.canceled)
         {
             AudioManager.Instance.StopSound();
+            gameObject.tag = "Player";
+
         }
     }
 
@@ -56,6 +59,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (context.performed && playerStats.mana >= shildManaCost)
         {
+            gameObject.tag = "Untagged";
             AudioManager.Instance.PlaySound(shild); 
             animator.SetTrigger("isSheltering");
             playerMoviement.horizontal = 0; 
@@ -65,6 +69,7 @@ public class PlayerAttack : MonoBehaviour
         else if (context.canceled)
         {
             AudioManager.Instance.StopSound();
+            gameObject.tag = "Player";
         }
     }
 
@@ -77,6 +82,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (context.performed && playerStats.mana >= crossManaCost)
         {
+            gameObject.tag = "Untagged";
             AudioManager.Instance.PlaySound(cross); 
             animator.SetTrigger("isShooting"); 
             playerMoviement.horizontal = 0; 
@@ -86,6 +92,8 @@ public class PlayerAttack : MonoBehaviour
         else if (context.canceled)
         {
             AudioManager.Instance.StopSound(); 
+            gameObject.tag = "Player";
+
         }
     }
 }

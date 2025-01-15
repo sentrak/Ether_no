@@ -16,11 +16,13 @@ public class DropManager : MonoBehaviour
     {
         if (Random.value <= dropChance)
         {
-            // Seleccionar aleatoriamente entre pan y vino
             GameObject itemToDrop = Random.value < 0.5f ? panPrefab : vinoPrefab;
 
-            // Instanciar el objeto en la posición del enemigo
-            Instantiate(itemToDrop, transform.position, Quaternion.identity);
+            Vector3 position = gameObject.transform.position;
+            position.x = position.x + 4f;
+            position.y = -2.3f;
+            Instantiate(itemToDrop, position, Quaternion.identity);
         }
+
     }
 }

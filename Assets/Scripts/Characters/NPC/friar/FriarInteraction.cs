@@ -1,100 +1,103 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/*
+ * Clase: FriarInteraction.
+ * Descripción: Gestiona la interacción del jugador con el fraile (Friar). 
+ *              Incluye mostrar un sprite de interacción, dropear ítems, mover al fraile y activar un teleport.
+ *              Además, desactiva temporalmente el movimiento del jugador durante la interacción.
+ */
 public class FriarInteraction : MonoBehaviour
 {
     [Header("Interaction Settings")]
-    [SerializeField] private GameObject interactionSprite; // Referencia al GameObject hijo con el sprite de la "A"
-    [SerializeField] private GameObject tp; // Referencia al tp al mundo 2
-    [SerializeField] private GameObject prefab1; // Primer prefab a dropear
-    [SerializeField] private GameObject prefab2; // Segundo prefab a dropear
+    [SerializeField] private GameObject interactionSprite; // Sprite que indica la interacción
+    [SerializeField] private GameObject tp; // Teleport al mundo 2
+    [SerializeField] private GameObject prefab1; // Primer prefab que se dropeará
+    [SerializeField] private GameObject prefab2; // Segundo prefab que se dropeará
     [SerializeField] private Transform dropPosition; // Posición donde se dropearán los prefabs
-    [SerializeField] private float moveDistance = 5f; // Distancia que el frailer se moverá
-    [SerializeField] private float moveSpeed = 2f; // Velocidad del movimiento del frailer
+    [SerializeField] private float moveDistance = 15f; // Distancia que el fraile se moverá
+    [SerializeField] private float moveSpeed = 7f; // Velocidad del movimiento del fraile
+
+    [Header("Player Settings")]
+    [SerializeField] private PlayerMoviement playerMoviement; // Referencia al script PlayerMoviement del jugador
+
+
+    [Header("Audio Sources")]
+    [SerializeField] private AudioClip dropItem; // Clip de audio reproducido al soltar un item
+    [SerializeField] private AudioClip walk; // Clip de audio reproducido al caminar 
     private bool isPlayerNearby = false; // Indica si el jugador está dentro del rango de interacción
-    private bool isInteracting = false; // Indica si la interacción está en curso
-    private Animator animator; // Referencia al Animator del frailer
-    private PrefabSpawner prefabSpawner; // Referencia al PrefabSpawner del frailer
-    private LevelManager levelManager; // Referencia al script LevelManager del GameObject tp
+    private bool isInteracting = false; // Indica si ya se está realizando una interacción
+    private Animator animator; // Referencia al Animator del fraile
+    private PrefabSpawner prefabSpawner; // Referencia al PrefabSpawner para generar prefabs
+    private LevelManager levelManager; // Referencia al LevelManager asociado al teleport
+    private CapsuleCollider2D capsuleCollider2D; // Referencia al CapsuleCollider2D
+    private BoxCollider2D boxCollider2D; // Referencia al BoxCollider2D
 
     /*
      * Método: Start.
      * Parámetros: Ninguno.
-     * Descripción: Asegura que el sprite de interacción esté desactivado al iniciar.
+     * Descripción: Inicializa las referencias necesarias, desactiva el sprite de interacción 
+     *              y emite una advertencia si falta la referencia al PlayerMoviement.
      */
     private void Start()
     {
         levelManager = tp.GetComponent<LevelManager>();
         animator = GetComponent<Animator>();
+        capsuleCollider2D = GetComponent<CapsuleCollider2D>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
         prefabSpawner = GetComponent<PrefabSpawner>();
-        if (interactionSprite != null)
+        interactionSprite?.SetActive(false);
+
+        if (playerMoviement == null)
         {
-            interactionSprite.SetActive(false);
-        }
-        else
-        {
-            Debug.LogError("No se asignó el sprite de interacción en el Inspector.");
+            Debug.LogWarning("PlayerMoviement is not assigned. Please set it in the Inspector.");
         }
     }
 
     /*
      * Método: OnTriggerEnter2D.
-     * @param other: Collider del objeto que entra en contacto.
-     * Descripción: Muestra el sprite de interacción si el jugador entra en el rango.
+     * @param other: Collider del objeto que entra en contacto con el trigger.
+     * Descripción: Activa el sprite de interacción si el jugador entra en el rango del fraile.
      */
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             isPlayerNearby = true;
-            if (interactionSprite != null)
-            {
-                interactionSprite.SetActive(true);
-            }
+            interactionSprite?.SetActive(true);
         }
     }
 
     /*
      * Método: OnTriggerExit2D.
-     * @param other: Collider del objeto que sale del contacto.
-     * Descripción: Oculta el sprite de interacción si el jugador sale del rango.
+     * @param other: Collider del objeto que sale del rango del trigger.
+     * Descripción: Desactiva el sprite de interacción si el jugador sale del rango del fraile.
      */
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             isPlayerNearby = false;
-            if (interactionSprite != null)
-            {
-                interactionSprite.SetActive(false);
-            }
+            interactionSprite?.SetActive(false);
         }
     }
 
     /*
      * Método: Interact.
-     * @param context: Contexto del Input System para detectar interacción.
-     * Descripción: Maneja la interacción cuando el jugador está cerca y presiona el botón.
+     * @param context: Contexto del Input System que captura la interacción del jugador.
+     * Descripción: Maneja la interacción, desactiva el movimiento del jugador, dropea ítems
+     *              y activa el proceso de movimiento y destrucción del fraile.
      */
     public void Interact(InputAction.CallbackContext context)
     {
         if (context.performed && isPlayerNearby && !isInteracting)
         {
             isInteracting = true;
-            if (interactionSprite != null)
-            {
-                interactionSprite.SetActive(false); // Ocultar el sprite al interactuar
-            }
-            Debug.Log("Se ha interactuado con el friar.");
-
-            // Pausar el juego
-            Time.timeScale = 0f;
-
-            // Dropear los prefabs
+            Destroy(boxCollider2D);
+            interactionSprite?.SetActive(false);
+            playerMoviement.IsUsingSkill = true;
+            capsuleCollider2D.isTrigger = true;
             DropItems();
-
-            // Activar la animación de caminar y moverse
             StartCoroutine(MoveAndDestroy());
         }
     }
@@ -102,37 +105,29 @@ public class FriarInteraction : MonoBehaviour
     /*
      * Método: DropItems.
      * Parámetros: Ninguno.
-     * Descripción: Dropea dos prefabs en la posición especificada.
+     * Descripción: Dropea dos prefabs en posiciones cercanas al fraile.
      */
     private void DropItems()
     {
-        if (prefab1 != null && prefab2 != null && dropPosition != null)
-        {
-            Vector3 position1 = new Vector3(dropPosition.position.x + 3f, -2.3f, dropPosition.position.y);
-            Vector3 position2 = new Vector3(dropPosition.position.x + 2f, -2.3f, dropPosition.position.y);
-            Instantiate(prefab1, position1, Quaternion.identity);
-            Instantiate(prefab2, position2, Quaternion.identity);
-            Debug.Log("Prefabs dropeados.");
-        }
-        else
-        {
-            Debug.LogError("No se asignaron los prefabs o la posición de dropeo en el Inspector.");
-        }
+        if (prefab1 == null || prefab2 == null || dropPosition == null) return;
+
+        AudioManager.Instance.PlaySound(dropItem);
+        AudioManager.Instance.PlaySound(dropItem);
+        Instantiate(prefab1, dropPosition.position + new Vector3(3f, -2.74f, 0f), Quaternion.identity);
+        Instantiate(prefab2, dropPosition.position + new Vector3(2f, -1.8f, 0f), Quaternion.identity);
     }
 
     /*
      * Método: MoveAndDestroy.
      * Parámetros: Ninguno.
-     * Descripción: Mueve al frailer una distancia específica, lo destruye y despausa el juego.
+     * Descripción: Mueve al fraile una distancia específica, genera más prefabs, activa el teleport
+     *              y destruye al fraile después de completar la interacción.
      */
     private System.Collections.IEnumerator MoveAndDestroy()
     {
-        if (animator != null)
-        {
-            animator.SetBool("isWalking", true); // Activar la animación de caminar
-        }
-
-        Vector3 targetPosition = transform.position + Vector3.right * moveDistance; // Calcular la posición objetivo
+        AudioManager.Instance.PlaySound(walk);
+        animator?.SetBool("run", true);
+        Vector3 targetPosition = transform.position + Vector3.right * moveDistance;
 
         while (Vector3.Distance(transform.position, targetPosition) > 0.1f)
         {
@@ -140,17 +135,23 @@ public class FriarInteraction : MonoBehaviour
             yield return null;
         }
 
-        if (animator != null)
-        {
-            animator.SetBool("isWalking", false); // Detener la animación de caminar
-        }
-        prefabSpawner.SpawnPrefab(-10.1f, -0.1000001f); 
-        prefabSpawner.SpawnPrefab(-4.8f, -0.1000001f); 
-        prefabSpawner.SpawnPrefab(4f, -0.1000001f);
-        Destroy(gameObject); // Destruir el frailer
-        Time.timeScale = 1f; // Despausar el juego
-        Debug.Log("El frailer ha terminado su interacción y se ha destruido.");
-         levelManager.triggerState = true;
+        animator?.SetBool("run", false);
+        SpawnPrefabs();
+        levelManager.SetTriggerState(true);
+
+        playerMoviement.IsUsingSkill = false;
+        Destroy(gameObject);
     }
-    
+
+    /*
+     * Método: SpawnPrefabs.
+     * Parámetros: Ninguno.
+     * Descripción: Genera tres prefabs en posiciones específicas después de completar el movimiento del fraile.
+     */
+    private void SpawnPrefabs()
+    {
+        prefabSpawner.SpawnPrefab(-10.1f, -0.1000001f);
+        prefabSpawner.SpawnPrefab(-4.8f, -0.1000001f);
+        prefabSpawner.SpawnPrefab(4f, -0.1000001f);
+    }
 }

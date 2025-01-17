@@ -483,9 +483,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec38865fd872ff4cbab439e41f96377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titleTheme: {fileID: 8300000, guid: c2a558fd6676c0f4d970b3e8fd170ae4, type: 3}
-  hoverbottom: {fileID: 8300000, guid: d4ad6549508739e4b992194f538a54fa, type: 3}
-  clickbottom: {fileID: 8300000, guid: c5e69ace8a105384cb527fc47ccdf050, type: 3}
+  titleTheme: {fileID: 8300000, guid: 229babb0664ffd64abb1266a19dd8323, type: 3}
+  hoverbottom: {fileID: 8300000, guid: 1bb3884973b762a419f80f7c0263ad9f, type: 3}
+  clickbottom: {fileID: 8300000, guid: 4bfa139e2c24ba44c8a7afee0ef70f17, type: 3}
 --- !u!1 &1811669519
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,7 +693,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.42
   m_Pitch: 1
   Loop: 0
   Mute: 0

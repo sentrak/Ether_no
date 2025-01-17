@@ -150,8 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Wine
   RecoveryCant: 10
-  mana: {fileID: 8300000, guid: 9ad2f8164c8c1314bbd07636a1ee88f7, type: 3}
-  bread: {fileID: 8300000, guid: e372acfcb8a93494b973100c0713489f, type: 3}
+  potion: {fileID: 8300000, guid: 888cbd60a850a414da7b8d398fe28770, type: 3}
 --- !u!1 &8392401436260755026
 GameObject:
   m_ObjectHideFlags: 0

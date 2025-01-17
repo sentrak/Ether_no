@@ -1,9 +1,14 @@
 using UnityEngine;
 
+/*
+ * Clase: PrefabSpawner.
+ * Descripción: Gestiona la generación de prefabs en posiciones específicas del mundo.
+ * Proporciona un método público que permite generar un prefab en coordenadas X e Y especificadas.
+ */
 public class PrefabSpawner : MonoBehaviour
 {
     [Header("Spawner Settings")]
-    [SerializeField] private GameObject prefabToSpawn; // Prefab que será spawneado
+    [SerializeField] private GameObject prefabToSpawn; // Prefab que será generado en la posición indicada
 
     /*
      * Método: SpawnPrefab.
@@ -13,18 +18,7 @@ public class PrefabSpawner : MonoBehaviour
      */
     public void SpawnPrefab(float positionX, float positionY)
     {
-        if (prefabToSpawn == null)
-        {
-            Debug.LogError("Prefab no asignado al PrefabSpawner.");
-            return;
-        }
-
-        // Crear la posición del prefab
         Vector3 spawnPosition = new Vector3(positionX, positionY, 0f);
-
-        // Instanciar el prefab en la posición indicada
         Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
-
-        Debug.Log($"Prefab spawneado en la posición: {spawnPosition}");
     }
 }

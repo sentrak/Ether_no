@@ -1,61 +1,87 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/*
+ * Clase: LevelManager.
+ * Descripción: Gestiona la lógica de cambio de escena en función de la interacción del jugador con un trigger.
+ */
 public class LevelManager : MonoBehaviour
 {
     [Header("Scene Settings")]
     [SerializeField] private string targetScene; // Nombre de la escena a cargar
-    [SerializeField] public bool triggerState = true; // Controla si el trigger está activo o no
 
-    private BoxCollider2D boxCollider; // Referencia al BoxCollider2D
+    private BoxCollider2D boxCollider; // Referencia al BoxCollider2D usado como trigger
+    private bool triggerState = false; // Estado inicial del trigger
 
     /*
      * Método: Start.
-     * Parámetros: Ninguno.
-     * Descripción: Inicializa el BoxCollider2D y configura su estado inicial.
+     * Descripción: Inicializa el estado del trigger y obtiene el BoxCollider2D.
      */
-    void Start()
+    private void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
         if (boxCollider == null)
         {
-            Debug.LogError("El GameObject no tiene un BoxCollider2D asignado.", this.gameObject);
-            return;
+            Debug.LogError("BoxCollider2D is missing from LevelManager GameObject.");
         }
-        boxCollider.isTrigger = triggerState;
+        else
+        {
+            UpdateTriggerState(); // Configura el estado inicial del trigger
+        }
     }
 
     /*
      * Método: SetTriggerState.
-     * @param state: Nuevo estado del trigger (true para activarlo, false para desactivarlo).
-     * Descripción: Permite cambiar el estado del trigger dinámicamente.
+     * @param state: Nuevo estado del trigger.
+     * Descripción: Activa o desactiva dinámicamente el trigger.
      */
     public void SetTriggerState(bool state)
     {
         triggerState = state;
+        UpdateTriggerState(); // Actualiza el estado del BoxCollider2D inmediatamente
+    }
+
+    /*
+     * Método: UpdateTriggerState.
+     * Descripción: Sincroniza el estado de triggerState con el BoxCollider2D.
+     */
+    private void UpdateTriggerState()
+    {
         if (boxCollider != null)
         {
-            boxCollider.isTrigger = state;
+            boxCollider.isTrigger = triggerState;
+            Debug.Log($"Trigger updated: triggerState={triggerState}, isTrigger={boxCollider.isTrigger}");
+        }else{
+            Debug.LogError("BoxCollider2D is missing from LevelManager GameObject.");
         }
     }
 
     /*
      * Método: OnTriggerEnter2D.
-     * @param collision: Collider del objeto que entra en contacto.
-     * Descripción: Detecta si el jugador entra en el trigger y cambia de escena.
+     * @param collision: Collider que interactúa con el trigger.
+     * Descripción: Cambia a la escena especificada si el jugador activa el trigger.
      */
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && triggerState)
+        if (triggerState && collision.CompareTag("Player"))
         {
-            if (!string.IsNullOrEmpty(targetScene))
-            {
-                SceneManager.LoadScene(targetScene); // Cargar la escena especificada
-            }
-            else
-            {
-                Debug.LogError("No se ha asignado un nombre de escena en el Inspector.", this.gameObject);
-            }
+            LoadTargetScene();
+        }
+    }
+
+    /*
+     * Método: LoadTargetScene.
+     * Descripción: Cambia a la escena especificada en targetScene.
+     */
+    private void LoadTargetScene()
+    {
+        if (!string.IsNullOrEmpty(targetScene))
+        {
+            SceneManager.LoadScene(targetScene);
+        }
+        else
+        {
+            Debug.LogWarning("Target scene name is not set.");
         }
     }
 }

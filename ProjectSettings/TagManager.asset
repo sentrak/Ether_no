@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 3
   tags:
   - Enemy
+  - PlayerPunch
+  - PlayerCross
+  - EnemyHitArea
+  - PlayerHitArea
+  - EnemyAttack
   layers:
   - Default
   - TransparentFX

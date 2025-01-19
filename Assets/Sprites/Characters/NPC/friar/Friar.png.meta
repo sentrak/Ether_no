@@ -117,6 +117,61 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+<<<<<<< Updated upstream:Assets/Sprites/Characters/NPC/friar/Friar.png.meta
+=======
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: VisionOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+>>>>>>> Stashed changes:Assets/Resources/Scenes/roofts-spritesheet.png.meta
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -310,6 +365,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+<<<<<<< Updated upstream:Assets/Sprites/Characters/NPC/friar/Friar.png.meta
       FiarStan: -3614645307940843442
       FiarStand_: -3614645307940843442
       FiarWalk_0: 8455997726935872784
@@ -319,6 +375,14 @@ TextureImporter:
       FiarWalk_4: -5888545814915850646
       FiarWalk_5: -9179307948402640425
       FiarYaMeCanse: 6868149457333805824
+=======
+      roofts-spritesheet_0: 6169980677641224755
+      roofts-spritesheet_1: -2948874253591402510
+      roofts-spritesheet_2: -8305332738309801471
+      roofts-spritesheet_3: 2461349577541865945
+      roofts-spritesheet_4: 3508146518194855202
+      roofts-spritesheet_5: 308579474131384889
+>>>>>>> Stashed changes:Assets/Resources/Scenes/roofts-spritesheet.png.meta
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

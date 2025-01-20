@@ -1,0 +1,536 @@
+fileFormatVersion: 2
+guid: e578ebb6fde4b4c429e3b10d129f1ad8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7427999988145837025
+    second: DragonElectrick_0
+  - first:
+      213: -6716634635884048055
+    second: DragonElectrick_1
+  - first:
+      213: -1074884226113970081
+    second: DragonElectrick_2
+  - first:
+      213: -3631281609403255101
+    second: DragonElectrick_3
+  - first:
+      213: -6945744685847417358
+    second: DragonElectrick_4
+  - first:
+      213: 3044712819736681167
+    second: DragonElectrick_5
+  - first:
+      213: 3893878039210367405
+    second: DragonElectrick_6
+  - first:
+      213: -6877047447456456911
+    second: DragonElectrick_7
+  - first:
+      213: -2736809151027380197
+    second: DragonElectrick_8
+  - first:
+      213: 9035126899077457673
+    second: DragonElectrick_9
+  - first:
+      213: 7563991352061522542
+    second: DragonElectrick_10
+  - first:
+      213: 8256140946490919345
+    second: DragonElectrick_11
+  - first:
+      213: -5968623952750550111
+    second: DragonElectrick_12
+  - first:
+      213: -4224060201606935003
+    second: DragonElectrick_13
+  - first:
+      213: 8060211330961322972
+    second: DragonElectrick_14
+  - first:
+      213: -4511451621745893905
+    second: DragonElectrick_15
+  - first:
+      213: 6381710501829684956
+    second: DragonElectrick_16
+  - first:
+      213: -3019201272069713081
+    second: DragonElectrick_17
+  - first:
+      213: 6213015702991176626
+    second: DragonElectrick_18
+  - first:
+      213: 2509536114297609523
+    second: DragonElectrick_19
+  - first:
+      213: 9032845623079132446
+    second: DragonElectrick_20
+  - first:
+      213: 1192295182908104486
+    second: DragonElectrick_21
+  - first:
+      213: 8045959103880961538
+    second: DragonElectrick_22
+  - first:
+      213: 295303942061561985
+    second: DragonElectrick_23
+  - first:
+      213: 8358697081305843163
+    second: DragonElectrick_24
+  - first:
+      213: -5733203709323430984
+    second: DragonElectrick_25
+  - first:
+      213: -4742429166810780414
+    second: DragonElectrick_26
+  - first:
+      213: 3973815452570902570
+    second: DragonElectrick_27
+  - first:
+      213: -1498845841452935383
+    second: DragonElectrick_28
+  - first:
+      213: -7861473584248104443
+    second: DragonElectrick_29
+  - first:
+      213: -5909305078794490241
+    second: DragonElectrick_30
+  - first:
+      213: 8672764212137634014
+    second: DragonElectrick_31
+  - first:
+      213: 2653460541089741506
+    second: DragonElectrick_32
+  - first:
+      213: 3737965058660442205
+    second: DragonElectrick_33
+  - first:
+      213: -7062044830499624560
+    second: DragonElectrick_34
+  - first:
+      213: 1129823144565625351
+    second: DragonElectrick_35
+  - first:
+      213: -4433253105385690625
+    second: DragonElectrick_36
+  - first:
+      213: 724056658486878613
+    second: DragonElectrick_37
+  - first:
+      213: -1379029093440024089
+    second: DragonElectrick_38
+  - first:
+      213: -8263289215743998182
+    second: DragonElectrick_39
+  - first:
+      213: 937187169653600141
+    second: DragonElectrick_40
+  - first:
+      213: -1862981571847226283
+    second: DragonElectrick_41
+  - first:
+      213: 1820010631188686469
+    second: DragonElectrick_42
+  - first:
+      213: 5809199747874268667
+    second: DragonElectrick_43
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: DEIdle_0
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 6278
+        width: 1040
+        height: 1975
+      alignment: 9
+      pivot: {x: 0.9888435, y: 0.0068661}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e3d90d42ae851760800000000000000
+      internalID: 7427999988145837025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DEIdle_1
+      rect:
+        serializedVersion: 2
+        x: 1327
+        y: 6280
+        width: 837
+        height: 1985
+      alignment: 9
+      pivot: {x: 0.95109224, y: 0.006992876}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c63c189d981b9dc0800000000000000
+      internalID: -3631281609403255101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DEIdle_2
+      rect:
+        serializedVersion: 2
+        x: 2463
+        y: 6278
+        width: 911
+        height: 1985
+      alignment: 9
+      pivot: {x: 0.80479735, y: 0.007845954}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da914dd2275d90630800000000000000
+      internalID: 3893878039210367405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DEStorm_0
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 3735
+        width: 845
+        height: 1985
+      alignment: 9
+      pivot: {x: 0.9240747, y: 0.007657283}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1089fec396e40ad0800000000000000
+      internalID: -2736809151027380197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DEStorm_2
+      rect:
+        serializedVersion: 2
+        x: 2420
+        y: 3735
+        width: 745
+        height: 2077
+      alignment: 9
+      pivot: {x: 0.9761388, y: 0.0120382365}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e62f0c71f02b8f860800000000000000
+      internalID: 7563991352061522542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DEStorm_1
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 3735
+        width: 994
+        height: 1922
+      alignment: 9
+      pivot: {x: 0.86414754, y: 0.0065851915}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b9062ba274b39270800000000000000
+      internalID: 8256140946490919345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DELightning_1
+      rect:
+        serializedVersion: 2
+        x: 1448
+        y: 1194
+        width: 1015
+        height: 2017
+      alignment: 9
+      pivot: {x: 0.726156, y: 0.0076486706}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1dd2927c3d1b5d70800000000000000
+      internalID: 9032845623079132446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DELightning_2
+      rect:
+        serializedVersion: 2
+        x: 2619
+        y: 1195
+        width: 1157
+        height: 2017
+      alignment: 9
+      pivot: {x: 0.635803, y: 0.007648731}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20e1528fc2df8af60800000000000000
+      internalID: 8045959103880961538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DELightning_3
+      rect:
+        serializedVersion: 2
+        x: 3940
+        y: 1194
+        width: 865
+        height: 2007
+      alignment: 9
+      pivot: {x: 0.88125056, y: 0.0065477616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd5445c85be000470800000000000000
+      internalID: 8358697081305843163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DELightning_0
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 1194
+        width: 837
+        height: 1985
+      alignment: 9
+      pivot: {x: 0.9561078, y: 0.0071322885}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20daacb9cc18f2eb0800000000000000
+      internalID: -4742429166810780414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DELightning_4
+      rect:
+        serializedVersion: 2
+        x: 4930
+        y: 1194
+        width: 1464
+        height: 1927
+      alignment: 9
+      pivot: {x: 0.99230856, y: 0.00806589}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7eea05f65eedfda0800000000000000
+      internalID: -5909305078794490241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 75c392cd2bf2e3e4fa66812fd9e47a59
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      DEIdle_0: 7427999988145837025
+      DEIdle_1: -3631281609403255101
+      DEIdle_2: 3893878039210367405
+      DELightning_0: -4742429166810780414
+      DELightning_1: 9032845623079132446
+      DELightning_2: 8045959103880961538
+      DELightning_3: 8358697081305843163
+      DELightning_4: -5909305078794490241
+      DEStorm_0: -2736809151027380197
+      DEStorm_1: 8256140946490919345
+      DEStorm_2: 7563991352061522542
+      DragonElectrick_0: 713275584
+      DragonElectrick_1: -6716634635884048055
+      DragonElectrick_12: -5968623952750550111
+      DragonElectrick_13: -4224060201606935003
+      DragonElectrick_14: 8060211330961322972
+      DragonElectrick_15: -4511451621745893905
+      DragonElectrick_16: 6381710501829684956
+      DragonElectrick_17: -3019201272069713081
+      DragonElectrick_18: 6213015702991176626
+      DragonElectrick_19: 2509536114297609523
+      DragonElectrick_2: -1074884226113970081
+      DragonElectrick_21: 1192295182908104486
+      DragonElectrick_23: 295303942061561985
+      DragonElectrick_25: -5733203709323430984
+      DragonElectrick_27: 3973815452570902570
+      DragonElectrick_28: -1498845841452935383
+      DragonElectrick_29: -7861473584248104443
+      DragonElectrick_31: 8672764212137634014
+      DragonElectrick_32: 2653460541089741506
+      DragonElectrick_33: 3737965058660442205
+      DragonElectrick_34: -7062044830499624560
+      DragonElectrick_35: 1129823144565625351
+      DragonElectrick_36: -4433253105385690625
+      DragonElectrick_37: 724056658486878613
+      DragonElectrick_38: -1379029093440024089
+      DragonElectrick_39: -8263289215743998182
+      DragonElectrick_4: -6945744685847417358
+      DragonElectrick_40: 937187169653600141
+      DragonElectrick_41: -1862981571847226283
+      DragonElectrick_42: 1820010631188686469
+      DragonElectrick_43: 5809199747874268667
+      DragonElectrick_5: 3044712819736681167
+      DragonElectrick_7: -6877047447456456911
+      DragonElectrick_9: 9035126899077457673
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

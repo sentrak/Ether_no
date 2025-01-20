@@ -38,6 +38,11 @@ public class PlayerGetHits : MonoBehaviour
             ApplyDamage(15);
             ApplyKnockback(collision);
         }
+        if (collision.CompareTag("Fire"))
+        {
+            ApplyDamage(30);
+            ApplyKnockback(collision);
+        }
     }
 
     /*

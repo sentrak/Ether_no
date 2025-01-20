@@ -9,5 +9,6 @@ public class Enemy : MonoBehaviour
 {
     public String enemyName; // Nombre del enemigo
     public int healtPoints; // Puntos de vida del enemigo
+    public int MaxHealtPoints; // Puntos de vida del enemigo
     public int moveSpeed; // Velocidad de movimiento del enemigo
 }

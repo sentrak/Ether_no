@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ormental2_0: -4101587092685298516
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

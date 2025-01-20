@@ -62,8 +62,17 @@ TagManager:
   - name: Props
     uniqueID: 2504459621
     locked: 0
+  - name: Npc
+    uniqueID: 2321059067
+    locked: 0
   - name: Player
     uniqueID: 4102075353
+    locked: 0
+  - name: Enemy1
+    uniqueID: 3320828527
+    locked: 0
+  - name: Enemy2
+    uniqueID: 3287120651
     locked: 0
   m_RenderingLayers:
   - Default

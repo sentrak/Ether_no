@@ -21,37 +21,40 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Spikes
+  - Player
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
   m_SortingLayers:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: BG
-    uniqueID: 2040147619
+  - name: BaseGround
+    uniqueID: 761170929
+    locked: 0
+  - name: Ground
+    uniqueID: 2620355425
     locked: 0
   - name: NPGround
     uniqueID: 1733933955
@@ -65,6 +68,10 @@ TagManager:
   - name: Props
     uniqueID: 2504459621
     locked: 0
+  - name: Spikes
+    uniqueID: 3821537053
+    locked: 0
+  - name: Movimiento
   - name: Npc
     uniqueID: 2321059067
     locked: 0

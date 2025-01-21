@@ -2,7 +2,7 @@ using UnityEngine;
 
 /*
  * Clase: AudioManager.
- * Descripción: Gestiona la reproducción de música y efectos de sonido (SFX) en el juego utilizando un 
+ * Descripción: Gestiona la reproducción de música y efectos de sonido (SFX) en el juego utilizando un
  * patrón Singleton. Proporciona métodos para reproducir, detener y ajustar el volumen de música y SFX.
  */
 public class AudioManager : MonoBehaviour

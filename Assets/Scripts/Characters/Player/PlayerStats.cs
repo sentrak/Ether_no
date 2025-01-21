@@ -124,4 +124,14 @@ public class PlayerStats : MonoBehaviour
     {
         mana = Mathf.Max(0, mana - amount);
     }
+
+    public void Die()
+    {
+        Debug.Log("Jugador ha muerto esta pasando por el código stats");
+        // Desactivar el movimiento del jugador
+
+        SceneManager.LoadScene("05 game over");
+
+    }
+
 }

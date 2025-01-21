@@ -10,6 +10,9 @@ TagManager:
   - EnemyHitArea
   - PlayerHitArea
   - EnemyAttack
+  - Fire
+  - Limit
+  - Props
   layers:
   - Default
   - TransparentFX
@@ -47,17 +50,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: BaseGround
-    uniqueID: 761170929
-    locked: 0
-  - name: Ground
-    uniqueID: 2620355425
+  - name: BG
+    uniqueID: 2040147619
     locked: 0
   - name: NPGround
     uniqueID: 1733933955
     locked: 0
-  - name: BG
-    uniqueID: 2040147619
+  - name: Ground
+    uniqueID: 2620355425
+    locked: 0
+  - name: BaseGround
+    uniqueID: 761170929
     locked: 0
   - name: Props
     uniqueID: 2504459621

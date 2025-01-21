@@ -3,10 +3,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+/*
+ * Clase: PlayerStats.
+ * Descripción: Gestiona las estadísticas del jugador, como vida y maná, y actualiza las barras de estado
+ * visuales.También maneja eventos importantes como la recuperación, reducción de vida/maná y la muerte del jugador.
+ */
 public class PlayerStats : MonoBehaviour
 {
     [Header("Audio Sources")]
-    [SerializeField] private AudioClip death, getHit; // Clips de audio para la muerte y daño del jugador
+    [SerializeField] private AudioClip death; // Clip de audio que se reproduce al morir el jugador
 
     [Header("Player Stats")]
     [SerializeField] private int maxHealth = 100; // Vida máxima del jugador
@@ -14,29 +19,18 @@ public class PlayerStats : MonoBehaviour
 
     public float health; // Vida actual del jugador
     public float mana; // Maná actual del jugador
-    public float inmunityTime; // Tiempo de inmunidad después de recibir daño
-    private bool isInmune; // Indica si el jugador es inmune al daño
-    public float knockBackForceX; // Fuerza de retroceso en X
 
     [Header("Player stats image bar")]
-    public float knockBackForceY; // Fuerza de retroceso en Y
-    public Image healtImg; // Imagen de barra de vida
-    public Image ManaImg; // Imagen de barra de maná
-    private SpriteRenderer sprite;
-    private Rigidbody2D rb;
-    private Animator animator;
-    private PlayerMoviement playerMoviement;
+    public Image healtImg; // Imagen de la barra de vida del jugador
+    public Image ManaImg; // Imagen de la barra de maná del jugador
+
     /*
-        * Método: Start.
-        * Parámetros: Ninguno.
-        * Descripción: Inicializa las referencias necesarias y configura los valores iniciales de vida y maná.
-        */
+     * Método: Start.
+     * Parámetros: Ninguno.
+     * Descripción: Inicializa los valores de vida y maná del jugador al máximo.
+     */
     void Start()
     {
-        playerMoviement = GetComponent<PlayerMoviement>();
-        animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
-        sprite = GetComponent<SpriteRenderer>();
         health = maxHealth;
         mana = maxMana;
     }
@@ -44,111 +38,100 @@ public class PlayerStats : MonoBehaviour
     /*
      * Método: Update.
      * Parámetros: Ninguno.
-     * Descripción: Actualiza las barras de vida y maná y maneja condiciones como muerte del jugador.
+     * Descripción: Actualiza las barras de vida y maná del jugador y maneja el evento de muerte si la vida llega a 0.
      */
     void Update()
     {
-        healtImg.fillAmount = health / maxHealth;
-        ManaImg.fillAmount = mana / maxMana;
+        UpdateHealthBar();
+        UpdateManaBar();
 
-        if (health > maxHealth) health = maxHealth;
-        else if (health <= 0)
+        if (health <= 0)
         {
-            AudioManager.Instance.PlaySound(death);
-            health = 0;
-            SceneManager.LoadScene("05 game over");
+            HandleDeath();
         }
-
-        if (mana > maxMana) mana = maxMana;
-        else if (mana <= 0) mana = 0;
     }
 
     /*
-     * Método: OnTriggerEnter2D.
-     * @param collision: Collider que interactúa con el jugador.
-     * Descripción: Detecta colisiones con enemigos, aplica daño y retroceso.
+     * Método: UpdateHealthBar.
+     * Parámetros: Ninguno.
+     * Descripción: Actualiza la barra de vida visual del jugador según su vida actual.
      */
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void UpdateHealthBar()
     {
-        if (collision.CompareTag("Enemy") && !isInmune)
-        {
-            animator.SetTrigger("getHit");
-            AudioManager.Instance.PlaySound(getHit);
-            health -= 10;
-            StartCoroutine(Inmunity());
-            if (collision.transform.position.x > transform.position.x)
-            {
-                rb.AddForce(new Vector2(-knockBackForceX, knockBackForceY), ForceMode2D.Force);
-            }
-            else
-            {
-                rb.AddForce(new Vector2(knockBackForceX, knockBackForceY), ForceMode2D.Force);
-            }
-        }
+        healtImg.fillAmount = health / maxHealth;
+        if (health > maxHealth) health = maxHealth;
+    }
+
+    /*
+     * Método: UpdateManaBar.
+     * Parámetros: Ninguno.
+     * Descripción: Actualiza la barra de maná visual del jugador según su maná actual.
+     */
+    private void UpdateManaBar()
+    {
+        ManaImg.fillAmount = mana / maxMana;
+        if (mana > maxMana) mana = maxMana;
+    }
+
+    /*
+     * Método: HandleDeath.
+     * Parámetros: Ninguno.
+     * Descripción: Maneja el evento de muerte del jugador, reproduce un sonido de muerte y carga la escena de Game Over.
+     */
+    private void HandleDeath()
+    {
+        AudioManager.Instance.PlaySound(death);
+        health = 0;
+        SceneManager.LoadScene("05 game over");
     }
 
     /*
      * Método: RecoveryHeal.
-     * Parámetros:
-     * @param amount: Cantidad de vida a restaurar.
-     * Descripción: Incrementa la vida del jugador.
+     * @param amount: Cantidad de vida a recuperar.
+     * Descripción: Recupera vida del jugador hasta el máximo permitido.
      */
     public void RecoveryHeal(int amount)
     {
         health = Mathf.Min(health + amount, maxHealth);
     }
+
     /*
- * Método: Recovery.
- * Parámetros:
- * @param amount: Cantidad de mana a restaurar.
- * Descripción: Incrementa el mana del jugador.
- */
+     * Método: RecoveryMana.
+     * @param amount: Cantidad de maná a recuperar.
+     * Descripción: Recupera maná del jugador hasta el máximo permitido.
+     */
     public void RecoveryMana(int amount)
     {
         mana = Mathf.Min(mana + amount, maxMana);
     }
 
     /*
-     * Método: Inmunity.
-     * Parámetros: Ninguno.
-     * Descripción: Activa un periodo de inmunidad temporal tras recibir daño.
+     * Método: ReduceHealth.
+     * @param amount: Cantidad de vida a reducir.
+     * Descripción: Reduce la vida del jugador, asegurando que no sea menor que 0.
      */
-    IEnumerator Inmunity()
+    public void ReduceHealth(int amount)
     {
-        playerMoviement.horizontal = 0;
-        animator.SetTrigger("getHit");
-        isInmune = true;
-        yield return new WaitForSeconds(inmunityTime);
-        isInmune = false;
+        health = Mathf.Max(0, health - amount);
     }
 
     /*
-     * Método: UseMana.
-     * @param amount: Cantidad de maná a consumir.
-     * Descripción: Reduce el maná del jugador.
+     * Método: ReduceMana.
+     * @param amount: Cantidad de maná a reducir.
+     * Descripción: Reduce el maná del jugador, asegurando que no sea menor que 0.
      */
-    public void UseMana(int amount)
+    public void ReduceMana(int amount)
     {
         mana = Mathf.Max(0, mana - amount);
     }
 
     public void Die()
     {
-        // Activar animación de muerte, no me estaba funcionando la animación de muerte
-        Debug.Log("Activando animación de la muerte con getHit");
-        animator.SetTrigger("getHit");
-
         Debug.Log("Jugador ha muerto esta pasando por el código stats");
         // Desactivar el movimiento del jugador
 
         SceneManager.LoadScene("05 game over");
-        //playerMoviement.enabled = false;
-        //rb.linearVelocity = Vector2.zero; // Detener la física del jugador
 
-  
-
-        // Esperar la duración de la animación de muerte antes de cargar la escena
-        //StartCoroutine(WaitForDeathAnimation());
     }
 
 }

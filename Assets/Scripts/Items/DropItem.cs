@@ -1,44 +1,43 @@
 using UnityEngine;
 
+/*
+ * Clase: DropItem.
+ * Descripción: Gestiona la interacción de los objetos recolectables en el juego. Los objetos 
+ * pueden restaurar vida o maná del jugador según su tipo, y se destruyen una vez recogidos.
+ */
 public class DropItem : MonoBehaviour
 {
     [Header("Item Properties")]
-    [SerializeField] private string itemName; // Nombre del objeto (Bread o Wine)
-    [SerializeField] private int RecoveryCant; // Cantidad que recupera el jugador
-    [Header("Audio Sources")]
+    [SerializeField] private string itemName; // Nombre del objeto (por ejemplo, "Bread" o "Wine")
+    [SerializeField] private int RecoveryCant; // Cantidad de vida o maná que recupera el jugador
 
-    [SerializeField] private AudioClip mana; // Clips de audio
-    [SerializeField] private AudioClip bread;// Clips de audio
+    [Header("Audio Sources")]
+    [SerializeField] private AudioClip potion; // Clip de audio reproducido al recoger un objeto 
+
     /*
      * Método: OnPickup.
-     * Parámetros: @param playerStats: Referencia al script PlayerStats del jugador.
-     * Descripción: Maneja la lógica de recuperación de vida o maná según el tipo de objeto.
+     * @param playerStats: Referencia al script PlayerStats del jugador.
+     * Descripción: Maneja la lógica de recuperación de vida o maná según el tipo de objeto y reproduce el audio correspondiente.
      */
     public void OnPickup(PlayerStats playerStats)
     {
         if (itemName == "Bread")
         {
             playerStats.RecoveryHeal(RecoveryCant);
-            AudioManager.Instance.PlaySound(bread);
-
-            Debug.Log($"Has recogido Pan y recuperaste {RecoveryCant} de vida.");
+            AudioManager.Instance.PlaySound(potion);
         }
         else if (itemName == "Wine")
         {
             playerStats.RecoveryMana(RecoveryCant);
-            AudioManager.Instance.PlaySound(mana);
-
-            Debug.Log($"Has recogido Vino y recuperaste {RecoveryCant} de maná.");
+            AudioManager.Instance.PlaySound(potion);
         }
-
-        // Destruir el objeto una vez recogido
         Destroy(gameObject);
     }
 
     /*
      * Método: OnTriggerEnter2D.
      * @param other: Collider del objeto que entra en contacto.
-     * Descripción: Detecta si el jugador recoge el objeto y llama a OnPickup.
+     * Descripción: Detecta si el jugador recoge el objeto y llama al método OnPickup.
      */
     private void OnTriggerEnter2D(Collider2D other)
     {

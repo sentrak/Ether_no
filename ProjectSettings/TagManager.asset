@@ -5,9 +5,11 @@ TagManager:
   serializedVersion: 3
   tags:
   - Enemy
-  - floor
-  - Spikes
-  - MovableSpike
+  - PlayerPunch
+  - PlayerCross
+  - EnemyHitArea
+  - PlayerHitArea
+  - EnemyAttack
   layers:
   - Default
   - TransparentFX
@@ -18,29 +20,29 @@ TagManager:
   - Ground
   - Spikes
   - Player
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
   m_SortingLayers:
   - name: Default
     uniqueID: 0
@@ -70,7 +72,17 @@ TagManager:
     uniqueID: 3821537053
     locked: 0
   - name: Movimiento
+  - name: Npc
+    uniqueID: 2321059067
+    locked: 0
+  - name: Player
     uniqueID: 4102075353
+    locked: 0
+  - name: Enemy1
+    uniqueID: 3320828527
+    locked: 0
+  - name: Enemy2
+    uniqueID: 3287120651
     locked: 0
   m_RenderingLayers:
   - Default

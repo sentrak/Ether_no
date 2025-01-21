@@ -62,6 +62,15 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""ef93c985-fff0-496a-a4e7-e707be174d5c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -79,7 +88,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""31dfc702-8bab-488e-9859-82d0d36cc7d5"",
-                    ""path"": ""<Keyboard>/z"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -211,7 +220,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e31b09a5-4cfd-49b8-a5c7-757c4cb94a09"",
-                    ""path"": ""<Keyboard>/c"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -233,7 +242,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""48aa03b9-7b24-40ca-8c0a-bf9f57e57eb9"",
-                    ""path"": ""<Keyboard>/x"",
+                    ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -251,6 +260,17 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""Cross"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""865abaa3-9467-4617-9793-1aadf94842bd"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -263,6 +283,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Shield = m_Player.FindAction("Shield", throwIfNotFound: true);
         m_Player_Cross = m_Player.FindAction("Cross", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
     }
 
     ~@PlayerController()
@@ -333,6 +354,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Shield;
     private readonly InputAction m_Player_Cross;
+    private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
         private @PlayerController m_Wrapper;
@@ -341,6 +363,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Shield => m_Wrapper.m_Player_Shield;
         public InputAction @Cross => m_Wrapper.m_Player_Cross;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -362,6 +385,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Cross.started += instance.OnCross;
             @Cross.performed += instance.OnCross;
             @Cross.canceled += instance.OnCross;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -378,6 +404,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Cross.started -= instance.OnCross;
             @Cross.performed -= instance.OnCross;
             @Cross.canceled -= instance.OnCross;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -401,5 +430,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnShield(InputAction.CallbackContext context);
         void OnCross(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

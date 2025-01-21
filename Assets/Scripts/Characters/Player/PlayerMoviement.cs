@@ -1,3 +1,4 @@
+// PlayerMoviement.cs
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,115 +6,161 @@ public class PlayerMoviement : MonoBehaviour
 {
     [Header("Audio Sources")]
     [SerializeField] private AudioClip jump; // Clip de audio para el salto
+    [SerializeField] private AudioClip walk; // Clip de audio para el caminar
+    [SerializeField] private AudioClip crouch; // Clip de audio para el agacharse
 
     [Header("Player Components")]
-    public Rigidbody2D rb; // Componente Rigidbody2D del jugador para manejar la física
-    public Transform groundCheck; // Transform usado para verificar si el jugador está tocando el suelo
-    public LayerMask groundLayer; // Capa que define qué objetos se consideran "suelo"
-    public Animator animator; // Referencia al Animator para manejar las animaciones del jugador
+    [SerializeField] private Rigidbody2D rb; // Referencia al Rigidbody2D para manejar la física del jugador
+    [SerializeField] private Transform groundCheck; // Punto de verificación para determinar si el jugador está en el suelo
+    [SerializeField] private LayerMask groundLayer; // Capa que representa los objetos considerados como "suelo"
+    [SerializeField] private Animator animator; // Referencia al Animator para controlar las animaciones del jugador
 
     [Header("Player Variables")]
-    public float horizontal; // Almacena el valor del movimiento horizontal del jugador
-    public float vertical; // Almacena el valor del movimiento vertical del jugador
+    [SerializeField] private float speed = 8f; // Velocidad de movimiento horizontal
+    [SerializeField] private float jumpingPower = 16f; // Fuerza aplicada al saltar
+
+    private float horizontal; // Movimiento horizontal del jugador
     private bool isFacingRight = true; // Indica si el jugador está mirando hacia la derecha
-    private bool isCrouched = false; // Indica si el jugador está agachado
-    private bool isRunning = false; // Indica si el jugador está corriendo
+    public bool isCrouched { get; private set; } = false; // Indica si el jugador está agachado
+    public bool IsUsingSkill { get; set; } = false; // Indica si el jugador está usando una habilidad
 
-    [SerializeField] private float speed = 8f; // Velocidad de movimiento horizontal del jugador
-    [SerializeField] private float jumpingPower = 16f; // Fuerza del salto normal del jugador
-    [SerializeField] private float doubleJumpingPower = 24f; // Fuerza del salto alto para doble clic
-    [SerializeField] private float doubleClickTime = 0.3f; // Tiempo para detectar doble clic
-    private float lastClickTime = -1f; // Tiempo del último clic de salto
-
-    void Update()
+    /*
+     * Método: Update.
+     * Parámetros: Ninguno.
+     * Descripción: Gestiona el cambio de dirección y actualiza las animaciones del jugador, excepto cuando está usando una habilidad.
+     */
+    private void Update()
     {
-        if (!isFacingRight && horizontal > 0f) Flip();
-        else if (isFacingRight && horizontal < 0f) Flip();
-        isRunning = Mathf.Abs(horizontal) > 0;
-        animator.SetBool("isRunning", isRunning);
-        animator.SetBool("isJumping", !IsGrounded());
-        animator.SetBool("isGrounded", IsGrounded());
-        if (rb.linearVelocity.y > 0)
-        {
-            animator.SetBool("isFalling", false);
-        }
-        else if (rb.linearVelocity.y < 0 && !IsGrounded())
-        {
-            animator.SetBool("isFalling", true);
-        }
-        else
-        {
-            animator.SetBool("isFalling", false);
-        }
+        if (IsUsingSkill) return;
+        HandleFlip();
+        UpdateAnimatorParameters();
     }
 
+    /*
+     * Método: FixedUpdate.
+     * Parámetros: Ninguno.
+     * Descripción: Aplica el movimiento horizontal al Rigidbody2D si el jugador no está agachado ni usando una habilidad.
+     */
     private void FixedUpdate()
     {
-        if (!isCrouched)
+        if (!isCrouched && !IsUsingSkill)
         {
             rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocity.y);
         }
     }
 
+    /*
+     * Método: Move.
+     * @param context: Contexto del Input System para capturar las entradas del jugador.
+     * Descripción: Maneja el movimiento horizontal, salto y agacharse según la entrada del jugador.
+     */
     public void Move(InputAction.CallbackContext context)
     {
+        if (IsUsingSkill) return;
+
         Vector2 input = context.ReadValue<Vector2>();
         horizontal = input.x;
-        vertical = input.y;
-
-        // Saltar
-        if (vertical > 0 && IsGrounded())
+        if (input.y > 0 && IsGrounded())
         {
-            HandleJump();
+            Jump();
         }
+        else if (input.y < 0 && IsGrounded())
+        {
+            rb.linearVelocity = Vector2.zero;
+            AudioManager.Instance.PlaySound(crouch);
+            Crouch();
 
-        // Crouch
-        if (vertical < 0 && IsGrounded())
+        }
+        else
+        {
+            StopCrouching();
+        }
+    }
+
+    /*
+     * Método: SetSkillState.
+     * @param isUsingSkill: Indica si el jugador está utilizando una habilidad.
+     * Descripción: Activa o desactiva el estado de uso de habilidad, deteniendo el movimiento y la física si es necesario.
+     */
+    public void SetSkillState(bool isUsingSkill)
+    {
+        IsUsingSkill = isUsingSkill;
+        if (isUsingSkill)
         {
             horizontal = 0;
-            animator.SetBool("isCrounched", true);
-        }
-        else
-        {
-            animator.SetBool("isCrounched", false);
+            rb.linearVelocity = Vector2.zero;
         }
     }
 
-    private void HandleJump()
+    /*
+     * Método: HandleFlip.
+     * Parámetros: Ninguno.
+     * Descripción: Cambia la dirección en la que mira el jugador según el movimiento horizontal.
+     */
+    private void HandleFlip()
     {
-        float currentTime = Time.time;
-
-        // Verificar si el tiempo entre clics es menor que el tiempo para un doble clic
-        if (currentTime - lastClickTime <= doubleClickTime)
+        if ((isFacingRight && horizontal < 0f) || (!isFacingRight && horizontal > 0f))
         {
-            // Si es un doble clic, saltar más alto
-            Jump(doubleJumpingPower);
-            lastClickTime = -1f; // Reiniciar el tiempo
-        }
-        else
-        {
-            // Si no es doble clic, salto normal
-            Jump(jumpingPower);
-            lastClickTime = Time.time; // Guardar el tiempo del primer clic
+            isFacingRight = !isFacingRight;
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1f;
+            transform.localScale = localScale;
         }
     }
 
-    private void Jump(float jumpForce)
+    /*
+     * Método: UpdateAnimatorParameters.
+     * Parámetros: Ninguno.
+     * Descripción: Actualiza los parámetros del Animator según el estado actual del jugador.
+     */
+    private void UpdateAnimatorParameters()
     {
-        // Aplicar la fuerza de salto
+        animator.SetBool("isRunning", Mathf.Abs(horizontal) > 0);
+        animator.SetBool("isJumping", !IsGrounded());
+        animator.SetBool("isGrounded", IsGrounded());
+        animator.SetBool("isFalling", rb.linearVelocity.y < 0 && !IsGrounded());
+    }
+
+    /*
+     * Método: Jump.
+     * Parámetros: Ninguno.
+     * Descripción: Aplica una fuerza hacia arriba para hacer que el jugador salte.
+     */
+    private void Jump()
+    {
         AudioManager.Instance.PlaySound(jump);
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
     }
 
-    private void Flip()
+    /*
+     * Método: Crouch.
+     * Parámetros: Ninguno.
+     * Descripción: Activa el estado de agachado del jugador, deteniendo su movimiento horizontal.
+     */
+    private void Crouch()
     {
-        isFacingRight = !isFacingRight;
-        Vector3 localScale = transform.localScale;
-        localScale.x *= -1f;
-        transform.localScale = localScale;
+        horizontal = 0;
+        isCrouched = true;
+        animator.SetBool("isCrounched", true);
     }
 
-    private bool IsGrounded()
+    /*
+     * Método: StopCrouching.
+     * Parámetros: Ninguno.
+     * Descripción: Desactiva el estado de agachado, permitiendo que el jugador vuelva a moverse.
+     */
+    private void StopCrouching()
+    {
+        isCrouched = false;
+        animator.SetBool("isCrounched", false);
+    }
+
+    /*
+     * Método: IsGrounded.
+     * Parámetros: Ninguno.
+     * Descripción: Verifica si el jugador está tocando el suelo utilizando un OverlapCircle.
+     */
+    public bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }

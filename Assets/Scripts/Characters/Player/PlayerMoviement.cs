@@ -2,11 +2,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-/*
- * Clase: PlayerMoviement.
- * Descripción: Controla el movimiento y las acciones del jugador en un entorno 2D, incluyendo correr, saltar, agacharse,
- * y el uso de habilidades. También gestiona las animaciones del jugador y su orientación en el escenario.
- */
 public class PlayerMoviement : MonoBehaviour
 {
     [Header("Audio Sources")]

@@ -15,7 +15,7 @@ public class MainTittle : MonoBehaviour
     {
         AudioManager.Instance.PlayMusic(titleTheme);
 
-    } 
+    }
     void OnEnable()
     {
         menu = GetComponent<UIDocument>();
@@ -34,7 +34,7 @@ void startGame(ClickEvent evt)
     {
         AudioManager.Instance.PlaySound(clickbottom);
         AudioManager.Instance.StopMusic();
-   SceneManager.LoadScene("03 level");
+   SceneManager.LoadScene("02 context");
     }
     void exitGame(ClickEvent evt)
     {

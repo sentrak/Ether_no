@@ -12,8 +12,6 @@ public class Projectile : MonoBehaviour
     private Vector3 startPosition; // Posición inicial del proyectil
     private ProjectilePooling poolManager; // Referencia al pool manager
 
-    [SerializeField] private Transform player; // Referencia al jugador
-
     /*
      * Método: Initialize.
      * @param direction: Dirección hacia donde se moverá el proyectil.
@@ -29,20 +27,11 @@ public class Projectile : MonoBehaviour
         this.startPosition = transform.position;
         this.poolManager = poolManager;
 
-        if (player != null)
-        {
-            // Calcula la dirección hacia el jugador
-            this.direction = (player.position - transform.position).normalized;
+        // Establecer la dirección
+        this.direction = direction;
 
-            // Ajusta la rotación del proyectil para que apunte al jugador
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, angle);
-        }
-        else
-        {
-            Debug.LogWarning("Player reference is missing in Projectile.");
-            this.direction = direction;
-        }
+        // Rotar el proyectil para que apunte hacia la dirección
+        RotateTowardsDirection(direction);
     }
 
     /*
@@ -56,6 +45,31 @@ public class Projectile : MonoBehaviour
 
         if (Vector3.Distance(startPosition, transform.position) >= maxRange)
         {
+            poolManager.ReturnToPool(gameObject);
+        }
+    }
+
+    /*
+     * Método: RotateTowardsDirection.
+     * @param direction: Dirección hacia donde apunta el proyectil.
+     * Descripción: Ajusta la rotación del proyectil para que apunte hacia la dirección especificada.
+     */
+    private void RotateTowardsDirection(Vector3 direction)
+    {
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    /*
+     * Método: OnTriggerEnter2D.
+     * @param collision: Collider del objeto con el que colisiona el proyectil.
+     * Descripción: Maneja la colisión con el objeto que tenga el tag "Player".
+     */
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") || collision.CompareTag("PlayerHitArea"))
+        {
+            Debug.Log("Projectile hit the Player!");
             poolManager.ReturnToPool(gameObject);
         }
     }

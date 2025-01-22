@@ -40,7 +40,12 @@ public class PlayerGetHits : MonoBehaviour
         }
         if (collision.CompareTag("Fire"))
         {
-            ApplyDamage(30);
+            ApplyDamage(20);
+            ApplyKnockback(collision);
+        }
+        if (collision.CompareTag("Ligthing"))
+        {
+            ApplyDamage(20);
             ApplyKnockback(collision);
         }
     }

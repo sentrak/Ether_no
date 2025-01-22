@@ -13,7 +13,7 @@ public class PlayerMoviement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb; // Referencia al Rigidbody2D para manejar la física del jugador
     [SerializeField] private Transform groundCheck; // Punto de verificación para determinar si el jugador está en el suelo
     [SerializeField] private LayerMask groundLayer; // Capa que representa los objetos considerados como "suelo"
-    [SerializeField] private Animator animator; // Referencia al Animator para controlar las animaciones del jugador
+    [SerializeField] public Animator animator; // Referencia al Animator para controlar las animaciones del jugador
 
     [Header("Player Variables")]
     [SerializeField] private float speed = 8f; // Velocidad de movimiento horizontal

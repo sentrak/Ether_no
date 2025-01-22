@@ -674,7 +674,27 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      laudes-fight-tree-spritesheet_0: -5134612720032584346
+      laudes-fight-tree-spritesheet_1: 3202627273095723010
+      laudes-fight-tree-spritesheet_10: -6502218077471590395
+      laudes-fight-tree-spritesheet_11: 5083481292687067013
+      laudes-fight-tree-spritesheet_12: 1955627036428333170
+      laudes-fight-tree-spritesheet_13: -559970983818363322
+      laudes-fight-tree-spritesheet_14: -6590727977766532366
+      laudes-fight-tree-spritesheet_15: 1826442233727583985
+      laudes-fight-tree-spritesheet_16: -7159456019289329156
+      laudes-fight-tree-spritesheet_17: -2145587296571952266
+      laudes-fight-tree-spritesheet_18: -4404012377540006400
+      laudes-fight-tree-spritesheet_19: -4927327009773520814
+      laudes-fight-tree-spritesheet_2: 1303354903010274265
+      laudes-fight-tree-spritesheet_3: -6399214475002025201
+      laudes-fight-tree-spritesheet_4: 8634113199131034151
+      laudes-fight-tree-spritesheet_5: -1339279675567529460
+      laudes-fight-tree-spritesheet_6: 5353278595324985975
+      laudes-fight-tree-spritesheet_7: 7926196383718023693
+      laudes-fight-tree-spritesheet_8: -8682841657384828103
+      laudes-fight-tree-spritesheet_9: 1372192973410379184
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -43,6 +43,12 @@ public class ProjectilePooling : MonoBehaviour
      */
     public void SpawnProjectile()
     {
+        if (targetTransform == null)
+        {
+            Debug.LogWarning("Target Transform is not assigned. Cannot spawn projectile.");
+            return;
+        }
+
         if (projectilePool.Count > 0)
         {
             GameObject projectile = projectilePool.Dequeue();

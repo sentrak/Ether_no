@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
 
 /*
  * Clase: DragonStats.
@@ -11,7 +13,8 @@ public class DragonStats : MonoBehaviour
     public int CurrentHealth => enemy.healtPoints; // Vida actual del dragón
 
     private Animator animator; // Referencia al Animator del dragón
-
+    [Header("Player stats image bar")]
+    public Image healtImg; // Imagen de la barra de vida del jugador
     /*
      * Método: Start.
      * Descripción: Inicializa la vida del dragón al valor máximo y obtiene las referencias necesarias.
@@ -23,6 +26,10 @@ public class DragonStats : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    void Update()
+    {
+        UpdateHealthBar();
+    }
     /*
      * Método: TakeDamage.
      * @param damage: Cantidad de daño a aplicar.
@@ -33,7 +40,6 @@ public class DragonStats : MonoBehaviour
         if (enemy == null) return;
 
         enemy.healtPoints -= damage;
-        Debug.Log($"Dragon took {damage} damage. Current health: {enemy.healtPoints}");
 
         if (enemy.healtPoints <= 0)
         {
@@ -49,6 +55,25 @@ public class DragonStats : MonoBehaviour
     {
         Debug.Log("Dragon has died.");
         animator.SetTrigger("dead");
-        // Agregar lógica adicional para la muerte del dragón, como deshabilitar componentes o generar recompensas.
+        StartCoroutine(DestroyAfterDelay(5f)); // Llama a una corrutina para destruir después de 5 segundos
+    }
+
+    /*
+     * Método: DestroyAfterDelay.
+     * @param delay: Tiempo en segundos antes de destruir el GameObject.
+     * Descripción: Espera un tiempo antes de destruir el GameObject.
+     */
+    private IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay); // Espera la cantidad especificada de segundos
+        Destroy(gameObject); // Destruye el GameObject
+    }
+
+    private void UpdateHealthBar()
+    {
+        healtImg.fillAmount = (float)enemy.healtPoints / (float)enemy.MaxHealtPoints;
+        Debug.Log($"La vida actual es {enemy.healtPoints} barra de vida: {healtImg.fillAmount}");
+
+        if (enemy.healtPoints > enemy.MaxHealtPoints) enemy.healtPoints = enemy.MaxHealtPoints;
     }
 }

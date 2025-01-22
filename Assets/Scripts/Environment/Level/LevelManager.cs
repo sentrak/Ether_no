@@ -20,14 +20,7 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
-        if (boxCollider == null)
-        {
-            Debug.LogError("BoxCollider2D is missing from LevelManager GameObject.");
-        }
-        else
-        {
-            UpdateTriggerState(); // Configura el estado inicial del trigger
-        }
+        UpdateTriggerState(); 
     }
 
     /*
@@ -51,7 +44,9 @@ public class LevelManager : MonoBehaviour
         {
             boxCollider.isTrigger = triggerState;
             Debug.Log($"Trigger updated: triggerState={triggerState}, isTrigger={boxCollider.isTrigger}");
-        }else{
+        }
+        else
+        {
             Debug.LogError("BoxCollider2D is missing from LevelManager GameObject.");
         }
     }

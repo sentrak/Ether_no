@@ -113,8 +113,8 @@ public class FriarInteraction : MonoBehaviour
 
         AudioManager.Instance.PlaySound(dropItem);
         AudioManager.Instance.PlaySound(dropItem);
-        Instantiate(prefab1, dropPosition.position + new Vector3(3f, -2.74f, 0f), Quaternion.identity);
-        Instantiate(prefab2, dropPosition.position + new Vector3(2f, -1.8f, 0f), Quaternion.identity);
+        Instantiate(prefab1, dropPosition.position + new Vector3(3f, -2.3f, 0f), Quaternion.identity);
+        Instantiate(prefab2, dropPosition.position + new Vector3(2f, -1.5f, 0f), Quaternion.identity);
     }
 
     /*
@@ -125,8 +125,8 @@ public class FriarInteraction : MonoBehaviour
      */
     private System.Collections.IEnumerator MoveAndDestroy()
     {
-        AudioManager.Instance.PlaySound(walk);
         animator?.SetBool("run", true);
+        AudioManager.Instance.PlaySound(walk);
         Vector3 targetPosition = transform.position + Vector3.right * moveDistance;
 
         while (Vector3.Distance(transform.position, targetPosition) > 0.1f)

@@ -199,7 +199,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      laudes-fight-clouds-tile_0: -6685026915193993700
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

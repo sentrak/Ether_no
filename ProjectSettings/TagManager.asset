@@ -10,6 +10,11 @@ TagManager:
   - EnemyHitArea
   - PlayerHitArea
   - EnemyAttack
+  - Limit
+  - Props
+  - Spikes
+  - Fire
+  - Ligthing
   layers:
   - Default
   - TransparentFX
@@ -20,69 +25,62 @@ TagManager:
   - Ground
   - Spikes
   - Player
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: BackGround_0
-    uniqueID: 4179099889
+  - name: Bg3
+    uniqueID: 1190453361
     locked: 0
-  - name: BackGround_1
-    uniqueID: 1054820969
+  - name: Bg2
+    uniqueID: 614167215
     locked: 0
-  - name: BaseGround
-    uniqueID: 761170929
-    locked: 0
-  - name: Ground
-    uniqueID: 2620355425
+  - name: bg1
+    uniqueID: 3210676713
     locked: 0
   - name: NPGround
-    uniqueID: 1733933955
+    uniqueID: 4027258835
     locked: 0
-  - name: BG
-    uniqueID: 2040147619
+  - name: Ground
+    uniqueID: 1689077069
+    locked: 0
+  - name: baseGround
+    uniqueID: 1469213555
     locked: 0
   - name: Props
-    uniqueID: 2504459621
-    locked: 0
-  - name: Spikes
-    uniqueID: 3821537053
-    locked: 0
-  - name: Movimiento
-  - name: Npc
-    uniqueID: 2321059067
+    uniqueID: 3272531945
     locked: 0
   - name: Player
-    uniqueID: 4102075353
+    uniqueID: 2265743517
     locked: 0
-  - name: Enemy1
-    uniqueID: 3320828527
+  - name: Enemy
+    uniqueID: 2470059075
     locked: 0
-  - name: Enemy2
-    uniqueID: 3287120651
+  - name: Npc
+    uniqueID: 1509626867
     locked: 0
   m_RenderingLayers:
   - Default

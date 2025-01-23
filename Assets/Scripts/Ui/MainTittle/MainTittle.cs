@@ -59,7 +59,7 @@ public class MainTittle : MonoBehaviour
         AudioManager.Instance.PlaySound(clickbottom);
         AudioManager.Instance.StopMusic();
         //SceneManager.LoadScene("02 Level01");
-        SceneManager.LoadScene("04 Level03");
+        SceneManager.LoadScene("02 Level01");
     }
 
     /*

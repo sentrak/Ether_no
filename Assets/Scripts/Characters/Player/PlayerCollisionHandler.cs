@@ -17,10 +17,11 @@ public class PlayerCollisionHandler : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log($"Colisión detectada con: {collision.gameObject.name}");
         // Verifica si el jugador tocó las púas
         if (collision.CompareTag("Spikes"))
         {
-
+            Debug.Log("El jugador toco las puas");
             // Reproducir el sonido de muerte, se debe configurar en el inspector
             if (deathSound != null && audioSource != null)
             {

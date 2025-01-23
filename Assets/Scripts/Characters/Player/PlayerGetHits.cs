@@ -3,13 +3,15 @@ using UnityEngine;
 
 /*
  * Clase: PlayerGetHits.
- * Descripción: Gestiona la detección de golpes al jugador, aplicando daño, retroceso y animaciones.
+ * Descripción: Gestiona la detección de golpes al jugador, aplicando daño, retroceso y animaciones asociadas.
  */
 public class PlayerGetHits : MonoBehaviour
 {
     [Header("Invulnerability Settings")]
     [SerializeField] private float knockBackForceX; // Fuerza de retroceso en el eje X al recibir daño
     [SerializeField] private float knockBackForceY; // Fuerza de retroceso en el eje Y al recibir daño
+
+    [Header("Player Components")]
     private PlayerStats playerStats; // Referencia al script PlayerStats que maneja las estadísticas del jugador
     private Animator animator; // Referencia al Animator del jugador
     private Rigidbody2D rb; // Referencia al Rigidbody2D del jugador
@@ -17,9 +19,9 @@ public class PlayerGetHits : MonoBehaviour
     /*
      * Método: Start.
      * Parámetros: Ninguno.
-     * Descripción: Inicializa las referencias necesarias, como PlayerStats, Rigidbody2D, Animator.
+     * Descripción: Inicializa las referencias necesarias, incluyendo PlayerStats, Rigidbody2D y Animator.
      */
-    void Start()
+    private void Start()
     {
         playerStats = GetComponentInParent<PlayerStats>();
         rb = GetComponentInParent<Rigidbody2D>();
@@ -29,25 +31,34 @@ public class PlayerGetHits : MonoBehaviour
     /*
      * Método: OnTriggerEnter2D.
      * @param collision: Collider del objeto que interactúa con el jugador.
-     * Descripción: Detecta colisiones con ataques enemigos, aplica daño y retroceso.
+     * Descripción: Detecta colisiones con ataques enemigos, aplica daño y retroceso según el tipo de ataque recibido.
      */
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("EnemyAttack"))
         {
-            ApplyDamage(15);
-            ApplyKnockback(collision);
+            HandleHit(15, collision);
         }
-        if (collision.CompareTag("Fire"))
+        else if (collision.CompareTag("Fire"))
         {
-            ApplyDamage(20);
-            ApplyKnockback(collision);
+            HandleHit(20, collision);
         }
-        if (collision.CompareTag("Ligthing"))
+        else if (collision.CompareTag("Lightning"))
         {
-            ApplyDamage(20);
-            ApplyKnockback(collision);
+            HandleHit(20, collision);
         }
+    }
+
+    /*
+     * Método: HandleHit.
+     * @param damage: Cantidad de daño a aplicar.
+     * @param collision: Collider del objeto atacante.
+     * Descripción: Aplica daño y retroceso al jugador según el ataque recibido.
+     */
+    private void HandleHit(int damage, Collider2D collision)
+    {
+        ApplyDamage(damage);
+        ApplyKnockback(collision);
     }
 
     /*

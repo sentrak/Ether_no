@@ -11,7 +11,6 @@ public class Projectile : MonoBehaviour
     private float maxRange; // Rango máximo del proyectil
     private Vector3 startPosition; // Posición inicial del proyectil
     private ProjectilePooling poolManager; // Referencia al pool manager
-
     /*
      * Método: Initialize.
      * @param direction: Dirección hacia donde se moverá el proyectil.
@@ -26,11 +25,7 @@ public class Projectile : MonoBehaviour
         this.maxRange = maxRange;
         this.startPosition = transform.position;
         this.poolManager = poolManager;
-
-        // Establecer la dirección
         this.direction = direction;
-
-        // Rotar el proyectil para que apunte hacia la dirección
         RotateTowardsDirection(direction);
     }
 
@@ -42,7 +37,6 @@ public class Projectile : MonoBehaviour
     private void Update()
     {
         transform.position += direction * speed * Time.deltaTime;
-
         if (Vector3.Distance(startPosition, transform.position) >= maxRange)
         {
             poolManager.ReturnToPool(gameObject);

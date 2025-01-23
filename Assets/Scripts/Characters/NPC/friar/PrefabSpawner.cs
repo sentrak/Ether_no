@@ -3,7 +3,7 @@ using UnityEngine;
 /*
  * Clase: PrefabSpawner.
  * Descripción: Gestiona la generación de prefabs en posiciones específicas del mundo.
- * Proporciona un método público que permite generar un prefab en coordenadas X e Y especificadas.
+ * Proporciona un método público para generar un prefab en coordenadas X e Y especificadas.
  */
 public class PrefabSpawner : MonoBehaviour
 {

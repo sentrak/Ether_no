@@ -3,9 +3,8 @@ using UnityEngine.InputSystem;
 
 /*
  * Clase: FriarInteraction.
- * Descripción: Gestiona la interacción del jugador con el fraile (Friar). 
- *              Incluye mostrar un sprite de interacción, dropear ítems, mover al fraile y activar un teleport.
- *              Además, desactiva temporalmente el movimiento del jugador durante la interacción.
+ * Descripción: Gestiona la interacción del jugador con el fraile (Friar), incluyendo mostrar un sprite de interacción,
+ * dropear ítems, mover al fraile y activar un teleport. Desactiva temporalmente el movimiento del jugador durante la interacción.
  */
 public class FriarInteraction : MonoBehaviour
 {
@@ -21,23 +20,26 @@ public class FriarInteraction : MonoBehaviour
     [Header("Player Settings")]
     [SerializeField] private PlayerMoviement playerMoviement; // Referencia al script PlayerMoviement del jugador
 
-
     [Header("Audio Sources")]
-    [SerializeField] private AudioClip dropItem; // Clip de audio reproducido al soltar un item
-    [SerializeField] private AudioClip walk; // Clip de audio reproducido al caminar 
+    [SerializeField] private AudioClip dropItem; // Clip de audio reproducido al soltar un ítem
+    [SerializeField] private AudioClip walk; // Clip de audio reproducido al caminar
+
+    [Header("Collider Components")]
+    private CapsuleCollider2D capsuleCollider2D; // Referencia al CapsuleCollider2D
+    private BoxCollider2D boxCollider2D; // Referencia al BoxCollider2D
+
+    [Header("Internal References")]
     private bool isPlayerNearby = false; // Indica si el jugador está dentro del rango de interacción
     private bool isInteracting = false; // Indica si ya se está realizando una interacción
     private Animator animator; // Referencia al Animator del fraile
     private PrefabSpawner prefabSpawner; // Referencia al PrefabSpawner para generar prefabs
     private LevelManager levelManager; // Referencia al LevelManager asociado al teleport
-    private CapsuleCollider2D capsuleCollider2D; // Referencia al CapsuleCollider2D
-    private BoxCollider2D boxCollider2D; // Referencia al BoxCollider2D
 
     /*
      * Método: Start.
      * Parámetros: Ninguno.
-     * Descripción: Inicializa las referencias necesarias, desactiva el sprite de interacción 
-     *              y emite una advertencia si falta la referencia al PlayerMoviement.
+     * Descripción: Inicializa las referencias necesarias, desactiva el sprite de  
+     * interacción y emite una advertencia si falta la referencia al PlayerMoviement.
      */
     private void Start()
     {
@@ -47,11 +49,6 @@ public class FriarInteraction : MonoBehaviour
         boxCollider2D = GetComponent<BoxCollider2D>();
         prefabSpawner = GetComponent<PrefabSpawner>();
         interactionSprite?.SetActive(false);
-
-        if (playerMoviement == null)
-        {
-            Debug.LogWarning("PlayerMoviement is not assigned. Please set it in the Inspector.");
-        }
     }
 
     /*
@@ -85,8 +82,8 @@ public class FriarInteraction : MonoBehaviour
     /*
      * Método: Interact.
      * @param context: Contexto del Input System que captura la interacción del jugador.
-     * Descripción: Maneja la interacción, desactiva el movimiento del jugador, dropea ítems
-     *              y activa el proceso de movimiento y destrucción del fraile.
+     * Descripción: Maneja la interacción, desactiva el movimiento del jugador, 
+     * dropea ítems y activa el proceso de movimiento y destrucción del fraile.
      */
     public void Interact(InputAction.CallbackContext context)
     {
@@ -105,13 +102,12 @@ public class FriarInteraction : MonoBehaviour
     /*
      * Método: DropItems.
      * Parámetros: Ninguno.
-     * Descripción: Dropea dos prefabs en posiciones cercanas al fraile.
+     * Descripción: Dropea dos prefabs en posiciones cercanas al fraile y reproduce un sonido.
      */
     private void DropItems()
     {
         if (prefab1 == null || prefab2 == null || dropPosition == null) return;
 
-        AudioManager.Instance.PlaySound(dropItem);
         AudioManager.Instance.PlaySound(dropItem);
         Instantiate(prefab1, dropPosition.position + new Vector3(3f, -2.3f, 0f), Quaternion.identity);
         Instantiate(prefab2, dropPosition.position + new Vector3(2f, -1.5f, 0f), Quaternion.identity);

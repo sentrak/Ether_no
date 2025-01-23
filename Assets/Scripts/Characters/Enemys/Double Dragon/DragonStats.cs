@@ -4,36 +4,42 @@ using UnityEngine.UI;
 
 /*
  * Clase: DragonStats.
- * Descripción: Gestiona los puntos de vida del dragón y controla su estado.
+ * Descripción: Gestiona los puntos de vida del dragón, actualiza su barra de vida y maneja la lógica de muerte.
  */
 public class DragonStats : MonoBehaviour
 {
-    private Enemy enemy; // Referencia al script Enemy
-
-    public int CurrentHealth => enemy.healtPoints; // Vida actual del dragón
-
+    [Header("Dragon Components")]
+    private Enemy enemy; // Referencia al script Enemy que contiene las estadísticas del dragón
     private Animator animator; // Referencia al Animator del dragón
-    [Header("Player stats image bar")]
-    public Image healtImg; // Imagen de la barra de vida del jugador
+
+    [Header("UI Settings")]
+    [SerializeField] private Image healtImg; // Imagen de la barra de vida del dragón
     /*
      * Método: Start.
-     * Descripción: Inicializa la vida del dragón al valor máximo y obtiene las referencias necesarias.
+     * Parámetros: Ninguno.
+     * Descripción: Inicializa la vida del dragón al máximo y obtiene las referencias necesarias.
      */
-    void Start()
+    private void Start()
     {
         enemy = GetComponent<Enemy>();
-        enemy.healtPoints = enemy.MaxHealtPoints; // Inicializa la vida al máximo
         animator = GetComponent<Animator>();
+            enemy.healtPoints = enemy.MaxHealtPoints;
     }
 
-    void Update()
+    /*
+     * Método: Update.
+     * Parámetros: Ninguno.
+     * Descripción: Actualiza la barra de vida del dragón en cada frame.
+     */
+    private void Update()
     {
         UpdateHealthBar();
     }
+
     /*
      * Método: TakeDamage.
      * @param damage: Cantidad de daño a aplicar.
-     * Descripción: Reduce los puntos de vida del dragón y verifica si está muerto.
+     * Descripción: Reduce los puntos de vida del dragón y verifica si debe morir.
      */
     public void TakeDamage(int damage)
     {
@@ -49,31 +55,41 @@ public class DragonStats : MonoBehaviour
 
     /*
      * Método: Die.
-     * Descripción: Maneja la lógica de muerte del dragón.
+     * Parámetros: Ninguno.
+     * Descripción: Maneja la lógica de muerte del dragón, activa la animación de muerte y destruye el GameObject después de un retraso.
      */
     private void Die()
     {
         Debug.Log("Dragon has died.");
         animator.SetTrigger("dead");
-        StartCoroutine(DestroyAfterDelay(5f)); // Llama a una corrutina para destruir después de 5 segundos
+        StartCoroutine(DestroyAfterDelay(3.5f));
     }
 
     /*
      * Método: DestroyAfterDelay.
      * @param delay: Tiempo en segundos antes de destruir el GameObject.
-     * Descripción: Espera un tiempo antes de destruir el GameObject.
+     * Descripción: Destruye el GameObject después de un tiempo específico.
      */
     private IEnumerator DestroyAfterDelay(float delay)
     {
-        yield return new WaitForSeconds(delay); // Espera la cantidad especificada de segundos
-        Destroy(gameObject); // Destruye el GameObject
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
     }
 
+    /*
+     * Método: UpdateHealthBar.
+     * Parámetros: Ninguno.
+     * Descripción: Actualiza la barra de vida visual del dragón en función de su vida actual.
+     */
     private void UpdateHealthBar()
     {
-        healtImg.fillAmount = (float)enemy.healtPoints / (float)enemy.MaxHealtPoints;
-        Debug.Log($"La vida actual es {enemy.healtPoints} barra de vida: {healtImg.fillAmount}");
+        if (enemy == null) return;
 
-        if (enemy.healtPoints > enemy.MaxHealtPoints) enemy.healtPoints = enemy.MaxHealtPoints;
+        healtImg.fillAmount = (float)enemy.healtPoints / (float)enemy.MaxHealtPoints;
+
+        if (enemy.healtPoints > enemy.MaxHealtPoints)
+        {
+            enemy.healtPoints = enemy.MaxHealtPoints;
+        }
     }
 }

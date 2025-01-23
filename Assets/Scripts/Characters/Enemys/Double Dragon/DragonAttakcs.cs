@@ -14,6 +14,8 @@ public class DragonAttakcs : MonoBehaviour
 
     [SerializeField] private float statusChange; // Tiempo entre cambios de estado
     [SerializeField] private ProjectilePooling projectilePooling; // Referencia al sistema de pooling de proyectiles
+    [Header("Msuic and SFX Settings")]
+    [SerializeField] private AudioClip projectile; // sonido de projectile 
 
     void Start()
     {
@@ -33,15 +35,8 @@ public class DragonAttakcs : MonoBehaviour
     {
         // Cambia el estado del dragón tras un tiempo aleatorio
         yield return new WaitForSeconds(statusChange);
+        status = DragonStatus.ATTACK;
 
-        if (enemy != null && enemy.healtPoints % 10 == 0)
-        {
-            status = DragonStatus.SPECIAL;
-        }
-        else
-        {
-            status = DragonStatus.ATTACK;
-        }
 
         StatusChanger();
     }
@@ -58,7 +53,8 @@ public class DragonAttakcs : MonoBehaviour
             case DragonStatus.ATTACK:
                 anim.SetTrigger("attack");
                 StartCoroutine(DragonStatuses());
-                SpawnFireballs(); // Generar proyectiles
+                SpawnFireballs(); 
+                Debug.Log("Si activó");
                 break;
 
             case DragonStatus.SPECIAL:
@@ -70,9 +66,8 @@ public class DragonAttakcs : MonoBehaviour
 
     private void SpawnFireballs()
     {
-        if (projectilePooling != null)
-        {
+        AudioManager.Instance.PlaySound(projectile);
             projectilePooling.SpawnProjectile();
-        }
+        
     }
 }

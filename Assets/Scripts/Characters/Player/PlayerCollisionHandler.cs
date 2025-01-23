@@ -1,35 +1,48 @@
 using UnityEngine;
 
+/*
+ * Clase: PlayerCollisionHandler.
+ * Descripción: Gestiona las colisiones del jugador con elementos peligrosos en el juego, como púas, y maneja eventos como la reproducción
+ *              de sonidos de muerte y la lógica asociada a la muerte del jugador.
+ */
 public class PlayerCollisionHandler : MonoBehaviour
 {
     [Header("Game Over Settings")]
-    [SerializeField] private AudioClip deathSound; // Verificar sonido de muerte
+    [SerializeField] private AudioClip deathSound; // Clip de audio que se reproduce al morir el jugador
 
-    private AudioSource audioSource; // Para reproducir sonidos
-    private PlayerStats playerStats; // Referencia al script PlayerStats
+    [Header("Player Components")]
+    private AudioSource audioSource; // Referencia al AudioSource del jugador para reproducir sonidos
+    private PlayerStats playerStats; // Referencia al script PlayerStats para gestionar la muerte del jugador
 
-    void Start()
+    /*
+     * Método: Start.
+     * Parámetros: Ninguno.
+     * Descripción: Inicializa las referencias al AudioSource y al PlayerStats del jugador.
+     */
+    private void Start()
     {
-        // Asegúrate de que el jugador tiene un AudioSource para reproducir el sonido
         audioSource = GetComponent<AudioSource>();
-        playerStats = GetComponent<PlayerStats>(); // Obtener el script PlayerStats
+        playerStats = GetComponent<PlayerStats>();
     }
 
+    /*
+     * Método: OnTriggerEnter2D.
+     * @param collision: Collider del objeto que entra en contacto con el jugador.
+     * Descripción: Detecta colisiones con objetos peligrosos, reproduce un sonido 
+     * de muerte y ejecuta la lógica de muerte del jugador.
+     */
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log($"Colisión detectada con: {collision.gameObject.name}");
-        // Verifica si el jugador tocó las púas
         if (collision.CompareTag("Spikes"))
         {
-            Debug.Log("El jugador toco las puas");
-            // Reproducir el sonido de muerte, se debe configurar en el inspector
             if (deathSound != null && audioSource != null)
             {
                 audioSource.PlayOneShot(deathSound);
             }
-
-            // Llama al método de muerte en PlayerStats
-            playerStats.Die();
+            if (playerStats != null)
+            {
+                playerStats.Die();
+            }
         }
     }
 }

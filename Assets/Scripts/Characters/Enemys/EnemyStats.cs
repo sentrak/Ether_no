@@ -5,30 +5,31 @@ using UnityEngine.SceneManagement;
 
 /*
  * Clase: EnemyStats.
- * Descripción: Gestiona las estadísticas y eventos relacionados con el enemigo, como la validación de su vida,
- * la ejecución de animaciones de muerte y la generación de drops al morir.Esta clase se encarga de la interacción
- * principal entre el jugador y el enemigo, incluyendo el daño y el retroceso.
+ * Descripción: Gestiona las estadísticas del enemigo, como la vida, el retroceso y la interacción con los ataques del jugador.
+ * Maneja eventos como la muerte del enemigo, incluyendo la reproducción de sonidos, animaciones y generación de drops.
  */
 public class EnemyStats : MonoBehaviour
 {
     [Header("Audio Sources")]
-    [SerializeField] private AudioClip death, getHit; // Clips de audio para la muerte y daño del enemigo
+    [SerializeField] private AudioClip death; // Clip de audio para la muerte del enemigo
+    [SerializeField] private AudioClip getHit; // Clip de audio para el daño recibido por el enemigo
 
     [Header("Enemy Stats")]
-    public float knockBackForceX; // Fuerza de retroceso en X
-    public float knockBackForceY; // Fuerza de retroceso en Y
+    [SerializeField] private float knockBackForceX; // Fuerza de retroceso en el eje X
+    [SerializeField] private float knockBackForceY; // Fuerza de retroceso en el eje Y
 
+    [Header("Enemy Components")]
     private Rigidbody2D rb; // Referencia al Rigidbody2D del enemigo
-    private Enemy enemy; // Referencia al script Enemy que contiene las estadísticas del enemigo
+    private Enemy enemy; // Referencia al script Enemy que contiene las estadísticas básicas del enemigo
     private Animator animator; // Referencia al Animator para manejar las animaciones del enemigo
     private DropManager dropManager; // Referencia al DropManager para gestionar los drops al morir el enemigo
 
     /*
      * Método: Start.
      * Parámetros: Ninguno.
-     * Descripción: Inicializa las referencias necesarias, incluyendo el Rigidbody2D, el Animator, el script Enemy y el DropManager.
+     * Descripción: Inicializa las referencias necesarias, como Rigidbody2D, Animator, Enemy y DropManager.
      */
-    void Start()
+    private void Start()
     {
         enemy = GetComponent<Enemy>();
         dropManager = GetComponent<DropManager>();
@@ -41,7 +42,7 @@ public class EnemyStats : MonoBehaviour
      * Parámetros: Ninguno.
      * Descripción: Valida constantemente la vida del enemigo y ejecuta la lógica de muerte si su vida llega a 0.
      */
-    void Update()
+    private void Update()
     {
         DeathEnemy();
     }
@@ -49,16 +50,16 @@ public class EnemyStats : MonoBehaviour
     /*
      * Método: DeathEnemy.
      * Parámetros: Ninguno.
-     * Descripción: Gestiona la muerte del enemigo, reproduce los efectos de sonido, activa la animación de muerte y genera drops.
+     * Descripción: Gestiona la muerte del enemigo, activa la animación de muerte, reproduce sonidos y genera drops.
      */
-    void DeathEnemy()
+    private void DeathEnemy()
     {
-        if (enemy.healtPoints <= 0)
+        if (enemy != null && enemy.healtPoints <= 0)
         {
             AudioManager.Instance.PlaySound(death);
             enemy.healtPoints = 0;
             animator.SetTrigger("dead");
-            dropManager.DropItem();
+            dropManager?.DropItem();
             Destroy(gameObject);
         }
     }
@@ -66,35 +67,35 @@ public class EnemyStats : MonoBehaviour
     /*
      * Método: OnTriggerEnter2D.
      * @param collision: Collider que interactúa con el enemigo.
-     * Descripción: Detecta colisiones con los ataques del jugador, aplica daño, retroceso y reproduce sonidos de impacto.
+     * Descripción: Detecta colisiones con ataques del jugador, aplica daño y retroceso, y reproduce sonidos de impacto.
      */
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("PlayerPunch"))
         {
-            AudioManager.Instance.PlaySound(getHit);
-            enemy.healtPoints -= 10;
-            if (collision.transform.position.x > transform.position.x)
-            {
-                rb.AddForce(new Vector2(-knockBackForceX, knockBackForceY), ForceMode2D.Force);
-            }
-            else
-            {
-                rb.AddForce(new Vector2(knockBackForceX, knockBackForceY), ForceMode2D.Force);
-            }
+            ApplyDamage(10, collision);
         }
-        if (collision.CompareTag("PlayerCross"))
+        else if (collision.CompareTag("PlayerCross"))
+        {
+            ApplyDamage(15, collision);
+        }
+    }
+
+    /*
+     * Método: ApplyDamage.
+     * @param damage: Cantidad de daño a aplicar.
+     * @param collision: Collider del objeto atacante.
+     * Descripción: Aplica daño al enemigo, reproduce el sonido de impacto y aplica retroceso en función de la posición del atacante.
+     */
+    private void ApplyDamage(int damage, Collider2D collision)
+    {
+        if (enemy != null)
         {
             AudioManager.Instance.PlaySound(getHit);
-            enemy.healtPoints -= 15;
-            if (collision.transform.position.x > transform.position.x)
-            {
-                rb.AddForce(new Vector2(-knockBackForceX, knockBackForceY), ForceMode2D.Force);
-            }
-            else
-            {
-                rb.AddForce(new Vector2(knockBackForceX, knockBackForceY), ForceMode2D.Force);
-            }
+            enemy.healtPoints -= damage;
+
+            float knockBackDirection = collision.transform.position.x > transform.position.x ? -1 : 1;
+            rb.AddForce(new Vector2(knockBackDirection * knockBackForceX, knockBackForceY), ForceMode2D.Force);
         }
     }
 }

@@ -3,47 +3,55 @@ using UnityEngine;
 
 /*
  * Clase: AddictionWitchCircularMovement.
- * Descripción: Gestiona el comportamiento de la "Addiction Witch", incluyendo mantener una distancia constante con el jugador,
- * realizar un movimiento circular y reproducir un audio cada 8 segundos.
+ * Descripción: Controla el movimiento de la "Addiction Witch", que realiza un movimiento circular 
+ * alrededor del jugador, mantiene una distancia constante y reproduce un sonido de risa cada 8 segundos.
  */
 public class AddictionWitchCircularMovement : MonoBehaviour
 {
     [Header("Player Reference")]
-    [SerializeField] private Transform player; // Referencia al jugador
+    [SerializeField] private Transform player; // Referencia al Transform del jugador
 
-    [Header("Movement Settings")]
-    [SerializeField] private float distanceFromPlayer = 5f; // Distancia constante con el jugador
+    [Header("Distance Settings")]
+    [SerializeField] private float distanceFromPlayer = 5f; // Distancia constante que la bruja mantiene del jugador
+    [SerializeField] private float upY = 2f; // Desplazamiento adicional en el eje Y para mantener la altura
+
+    [Header("Circular Movement Settings")]
     [SerializeField] private float orbitRadius = 3f; // Radio del movimiento circular
-    [SerializeField] private float orbitSpeed = 2f; // Velocidad del movimiento circular
-    [SerializeField] private float upY = 2f; // Desplazamiento adicional en el eje Y
+    [SerializeField] private float orbitSpeed = 2f; // Velocidad del movimiento circular en radianes por segundo
 
     [Header("Audio Settings")]
-    [SerializeField] private AudioClip witchLaught; // Clip de audio de la risa de la bruja
-    public bool isAnimating { get; set; } = false; // Indica si el jugador está usando una habilidad
+    [SerializeField] private AudioClip witchLaught; // Clip de audio para la risa de la bruja
 
-        private float angle; // Ángulo actual del movimiento circular
+    [Header("State Management")]
+    public bool isAnimating { get; set; } = false; // Indica si el jugador está usando una habilidad o la bruja está animándose
 
-    void Start()
-    {
+    [Header("Internal State")]
+    private float angle; // Ángulo actual del movimiento circular
 
-    }
-
+    /*
+     * Método: Update.
+     * Parámetros: Ninguno.
+     * Descripción: Actualiza el comportamiento de la bruja en cada frame, incluyendo el movimiento 
+     * circular, el mantenimiento de la distancia con el jugador y la reproducción de audio.
+     */
     void Update()
     {
-
         if (!isAnimating)
         {
             PerformCircularMovement();
             MaintainDistance();
             StartCoroutine(PlayWitchLaughRoutine());
-        }else{
+        }
+        else
+        {
             StartCoroutine(PlayWitchLaughRoutine());
         }
     }
 
     /*
      * Método: MaintainDistance.
-     * Descripción: Mantiene una distancia constante entre la "Addiction Witch" y el jugador.
+     * Parámetros: Ninguno.
+     * Descripción: Calcula y ajusta la posición de la bruja para mantener una distancia constante del jugador.
      */
     private void MaintainDistance()
     {
@@ -53,7 +61,8 @@ public class AddictionWitchCircularMovement : MonoBehaviour
 
     /*
      * Método: PerformCircularMovement.
-     * Descripción: Realiza un movimiento circular continuo basado en el radio y la velocidad configurados.
+     * Parámetros: Ninguno.
+     * Descripción: Calcula y aplica un movimiento circular en el plano X-Y utilizando un ángulo basado en el tiempo.
      */
     private void PerformCircularMovement()
     {
@@ -64,21 +73,20 @@ public class AddictionWitchCircularMovement : MonoBehaviour
 
         transform.position = new Vector3(xOffset, yOffset, transform.position.z);
 
-        // Reinicia el ángulo si supera los 360 grados (2 * PI en radianes)
         if (angle >= 2 * Mathf.PI)
         {
-            angle -= 2 * Mathf.PI;
+            angle -= 2 * Mathf.PI; 
         }
     }
 
     /*
      * Método: PlayWitchLaughRoutine.
-     * Descripción: Reproduce el audio de la risa de la bruja cada 8 segundos.
+     * Parámetros: Ninguno.
+     * Descripción: Espera un tiempo definido (8 segundos) y reproduce un clip de audio para la risa de la bruja.
      */
     private IEnumerator PlayWitchLaughRoutine()
     {
         yield return new WaitForSeconds(8f);
         AudioManager.Instance.PlaySound(witchLaught);
     }
-
 }

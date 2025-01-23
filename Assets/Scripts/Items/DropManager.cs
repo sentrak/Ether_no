@@ -2,7 +2,7 @@ using UnityEngine;
 
 /*
  * Clase: DropManager.
- * Descripción: Gestiona la lógica para dropear objetos (ítems) cuando un evento ocurre, como la muerte 
+ * Descripción: Gestiona la lógica para dropear objetos (ítems) cuando ocurre un evento, como la muerte 
  * de un enemigo. Decide qué tipo de objeto dropear (pan o vino) basado en probabilidades configurables.
  */
 public class DropManager : MonoBehaviour
@@ -13,12 +13,13 @@ public class DropManager : MonoBehaviour
     [SerializeField] private float dropChance = 0.5f; // Probabilidad de dropear un objeto (0.0 - 1.0)
 
     [Header("Audio Sources")]
-    [SerializeField] private AudioClip dropItem; // Clip de audio reproducido al soltar un item
+    [SerializeField] private AudioClip dropItem; // Clip de audio reproducido al soltar un ítem
+
     /*
      * Método: DropItem.
      * Parámetros: Ninguno.
-     * Descripción: Decide si dropear "pan" o "vino" basado en la probabilidad configurada.
-     * Si elige dropear, selecciona un prefab y lo genera en una posición específica.
+     * Descripción: Gestiona la lógica para decidir si dropear un ítem basado en la probabilidad configurada.
+     * Si la probabilidad es exitosa, selecciona entre "pan" o "vino" y lo genera en una posición específica.
      */
     public void DropItem()
     {

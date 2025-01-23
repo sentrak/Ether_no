@@ -16,7 +16,6 @@ public class ProjectilePooling : MonoBehaviour
 
     [Header("Target Settings")]
     [SerializeField] private Transform targetTransform; // Transform del objetivo hacia el que se disparan los proyectiles
-
     private Queue<GameObject> projectilePool; // Cola que almacena los proyectiles disponibles
 
     /*
@@ -27,7 +26,6 @@ public class ProjectilePooling : MonoBehaviour
     private void Start()
     {
         projectilePool = new Queue<GameObject>();
-
         for (int i = 0; i < poolSize; i++)
         {
             GameObject projectile = Instantiate(projectilePrefab);
@@ -48,19 +46,12 @@ public class ProjectilePooling : MonoBehaviour
             Debug.LogWarning("Target Transform is not assigned. Cannot spawn projectile.");
             return;
         }
-
         if (projectilePool.Count > 0)
         {
             GameObject projectile = projectilePool.Dequeue();
             projectile.SetActive(true);
-
-            // Colocar el proyectil en la posición actual del GameObject
             projectile.transform.position = transform.position;
-
-            // Calcular la dirección hacia el objetivo
             Vector3 direction = (targetTransform.position - transform.position).normalized;
-
-            // Configurar el movimiento del proyectil
             projectile.GetComponent<Projectile>().Initialize(direction, projectileSpeed, maxRange, this);
         }
     }

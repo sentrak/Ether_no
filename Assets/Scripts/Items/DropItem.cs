@@ -3,7 +3,7 @@ using UnityEngine;
 /*
  * Clase: DropItem.
  * Descripción: Gestiona la interacción de los objetos recolectables en el juego. Los objetos 
- * pueden restaurar vida o maná del jugador según su tipo, y se destruyen una vez recogidos.
+ *              pueden restaurar vida o maná del jugador según su tipo, y se destruyen una vez recogidos.
  */
 public class DropItem : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class DropItem : MonoBehaviour
     [SerializeField] private int RecoveryCant; // Cantidad de vida o maná que recupera el jugador
 
     [Header("Audio Sources")]
-    [SerializeField] private AudioClip potion; // Clip de audio reproducido al recoger un objeto 
+    [SerializeField] private AudioClip potion; // Clip de audio reproducido al recoger un objeto
 
     /*
      * Método: OnPickup.
@@ -31,6 +31,7 @@ public class DropItem : MonoBehaviour
             playerStats.RecoveryMana(RecoveryCant);
             AudioManager.Instance.PlaySound(potion);
         }
+
         Destroy(gameObject);
     }
 

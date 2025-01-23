@@ -1,8 +1,9 @@
 using UnityEngine;
+
 /*
  * Clase: EnemyMovement.
  * Descripción: Controla el movimiento del enemigo, incluyendo el seguimiento del jugador, detección de rangos y la activación de animaciones.
- * Además, invierte la orientación del sprite para que el enemigo siempre mire hacia el jugador.
+ *              El enemigo ajusta su orientación para mirar siempre hacia el jugador.
  */
 public class EnemyMovement : MonoBehaviour
 {
@@ -11,10 +12,13 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float stopDistance = 2f; // Distancia mínima a la que el enemigo se detiene para atacar
     [SerializeField] private float moveSpeed = 5f; // Velocidad de movimiento del enemigo
 
+    [Header("Enemy Components")]
     private Transform player; // Referencia al Transform del jugador
     private Animator animator; // Referencia al Animator del enemigo
-    private bool isFacingRight = true; // Indica si el enemigo está mirando a la derecha
     private DruggedAttack druggedAttack; // Referencia al script DruggedAttack del enemigo
+
+    [Header("State Management")]
+    private bool isFacingRight = true; // Indica si el enemigo está mirando a la derecha
 
     /*
      * Método: Start.
@@ -23,7 +27,7 @@ public class EnemyMovement : MonoBehaviour
      */
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
         animator = GetComponent<Animator>();
         druggedAttack = GetComponent<DruggedAttack>();
     }
@@ -31,21 +35,21 @@ public class EnemyMovement : MonoBehaviour
     /*
      * Método: Update.
      * Parámetros: Ninguno.
-     * Descripción: Gestiona el movimiento, detección del jugador y ataques del enemigo.
+     * Descripción: Gestiona el movimiento del enemigo, detecta al jugador y realiza ataques cuando está en rango.
      */
     void Update()
     {
+        if (player == null) return;
+
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
         if (distanceToPlayer <= detectionDistance && distanceToPlayer > stopDistance)
         {
-
             animator.SetBool("walk", true);
             MoveTowardsPlayer();
         }
         else if (distanceToPlayer <= stopDistance)
         {
-
             animator.SetBool("walk", false);
             druggedAttack.ExecuteAttack();
         }
@@ -60,7 +64,7 @@ public class EnemyMovement : MonoBehaviour
     /*
      * Método: MoveTowardsPlayer.
      * Parámetros: Ninguno.
-     * Descripción: Mueve al enemigo hacia el jugador.
+     * Descripción: Mueve al enemigo hacia el jugador mientras el jugador está dentro del rango de detección.
      */
     private void MoveTowardsPlayer()
     {
@@ -71,7 +75,7 @@ public class EnemyMovement : MonoBehaviour
     /*
      * Método: FlipSprite.
      * Parámetros: Ninguno.
-     * Descripción: Invierte la orientación del sprite del enemigo para que mire hacia el jugador.
+     * Descripción: Invierte la orientación del sprite del enemigo para que siempre mire hacia el jugador.
      */
     private void FlipSprite()
     {

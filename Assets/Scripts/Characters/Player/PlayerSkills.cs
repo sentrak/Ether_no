@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 
 /*
  * Clase: PlayerSkills.
- * Descripción: Gestiona las habilidades del jugador, como ataques, uso de escudo y habilidades especiales.
- * Controla el consumo de maná, activa animaciones y sincroniza el uso de habilidades con el movimiento.
+ * Descripción: Gestiona las habilidades del jugador, como ataques, uso del escudo y habilidades especiales.
+ *              Controla el consumo de maná, activa animaciones y sincroniza el uso de habilidades con el movimiento.
  */
 public class PlayerSkills : MonoBehaviour
 {
@@ -17,8 +17,8 @@ public class PlayerSkills : MonoBehaviour
 
     [Header("Player Components")]
     [SerializeField] private Animator animator; // Referencia al Animator para activar las animaciones
-    private PlayerStats playerStats; // Referencia al script PlayerStats que maneja la vida y el maná del jugador
-    private PlayerMoviement playerMoviement; // Referencia al script PlayerMoviement para sincronizar habilidades con movimiento
+    private PlayerStats playerStats; // Referencia al script PlayerStats que gestiona la vida y el maná del jugador
+    private PlayerMoviement playerMoviement; // Referencia al script PlayerMoviement para sincronizar habilidades con el movimiento
 
     [Header("Mana Settings")]
     [SerializeField] private int crossManaCost = 10; // Costo de maná para usar la habilidad "Cross"
@@ -27,7 +27,7 @@ public class PlayerSkills : MonoBehaviour
     /*
      * Método: Start.
      * Parámetros: Ninguno.
-     * Descripción: Inicializa las referencias a los componentes PlayerStats y PlayerMoviement.
+     * Descripción: Inicializa las referencias necesarias a PlayerStats y PlayerMoviement.
      */
     private void Start()
     {
@@ -38,7 +38,7 @@ public class PlayerSkills : MonoBehaviour
     /*
      * Método: PerformAttack.
      * @param context: Contexto del Input System para la acción de ataque.
-     * Descripción: Maneja el ataque del jugador activando animaciones y sonidos.
+     * Descripción: Gestiona el ataque del jugador activando animaciones y sonidos.
      */
     public void PerformAttack(InputAction.CallbackContext context)
     {
@@ -48,7 +48,7 @@ public class PlayerSkills : MonoBehaviour
     /*
      * Método: UseShield.
      * @param context: Contexto del Input System para la acción de escudo.
-     * Descripción: Maneja el uso del escudo consumiendo maná y activando animaciones y sonidos.
+     * Descripción: Maneja el uso del escudo, consumiendo maná y activando animaciones y sonidos.
      */
     public void UseShield(InputAction.CallbackContext context)
     {
@@ -69,10 +69,10 @@ public class PlayerSkills : MonoBehaviour
      * Método: HandleSkill.
      * @param context: Contexto del Input System para la acción de la habilidad.
      * @param sound: Clip de audio que se reproduce al usar la habilidad.
-     * @param animationTrigger: Nombre del trigger para la animación correspondiente.
+     * @param animationTrigger: Nombre del trigger de animación correspondiente.
      * @param manaCost: Costo de maná necesario para ejecutar la habilidad.
-     * Descripción: Gestiona el inicio y finalización de una habilidad, sincronizando el movimiento, el consumo de maná, 
-     *  la animación y el sonido.
+     * Descripción: Gestiona el inicio y la finalización de una habilidad, 
+     * sincronizando el movimiento, el consumo de maná, la animación y el sonido.
      */
     private void HandleSkill(InputAction.CallbackContext context, AudioClip sound, string animationTrigger, int manaCost)
     {

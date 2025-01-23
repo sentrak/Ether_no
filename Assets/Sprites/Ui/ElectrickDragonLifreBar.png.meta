@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ElectrickDragonLifreBar_0: -2642069905353476058
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

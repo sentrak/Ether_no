@@ -144,7 +144,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 1.5
   m_Material: {fileID: 6200000, guid: 72c7769d97e92da4e9ebbd2c35bdedea, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -356,10 +356,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   death: {fileID: 8300000, guid: 20c6549ce83d2b34db558d5d5d9c6b98, type: 3}
-  maxHealth: 100
-  maxMana: 50
-  health: 100
-  mana: 50
+  maxHealth: 250
+  maxMana: 150
+  health: 250
+  mana: 150
   healtImg: {fileID: 0}
   ManaImg: {fileID: 0}
 --- !u!114 &7801826215319366831
@@ -383,8 +383,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   animator: {fileID: 7314140305419803646}
-  speed: 8
-  jumpingPower: 8
+  speed: 12
+  jumpingPower: 12
 --- !u!1 &3488194876881902579
 GameObject:
   m_ObjectHideFlags: 0

@@ -39,16 +39,10 @@ public class GameOver : MonoBehaviour
     {
         menu = GetComponent<UIDocument>();
         VisualElement root = menu.rootVisualElement;
-
-        // Asignar botones desde la UI
         btnPlay = root.Q<Button>("btnPlay");
         btnExit = root.Q<Button>("btnExit");
-
-        // Registrar callbacks para los botones
         btnPlay.RegisterCallback<ClickEvent>(startGame);
         btnExit.RegisterCallback<ClickEvent>(exitGame);
-
-        // Registrar el evento de hover para los botones
         btnPlay.RegisterCallback<MouseEnterEvent>(playHoverSound);
         btnExit.RegisterCallback<MouseEnterEvent>(playHoverSound);
     }

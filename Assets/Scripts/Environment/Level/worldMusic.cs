@@ -8,10 +8,4 @@ public class worldMusic : MonoBehaviour
         AudioManager.Instance.PlayMusic(levelMusic);
         
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

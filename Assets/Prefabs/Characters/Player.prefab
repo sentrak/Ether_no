@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 3002977228223708352}
   - component: {fileID: 1238063195220482015}
   - component: {fileID: 7801826215319366831}
+  - component: {fileID: 902211569129280150}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -383,6 +384,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   animator: {fileID: 7314140305419803646}
+--- !u!114 &902211569129280150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587621331290567309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c8ed6b72cff84beaaa1afbe3a205f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathSound: {fileID: 0}
   speed: 12
   jumpingPower: 12
 --- !u!1 &3488194876881902579

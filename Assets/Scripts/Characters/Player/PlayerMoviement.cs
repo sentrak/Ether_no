@@ -2,12 +2,17 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/*
+ * Clase: PlayerMoviement.
+ * Descripción: Gestiona el movimiento del jugador, incluyendo caminar, saltar y agacharse. 
+ *              Permite controlar el estado de habilidades activas y sincroniza las animaciones con los estados del jugador.
+ */
 public class PlayerMoviement : MonoBehaviour
 {
     [Header("Audio Sources")]
     [SerializeField] private AudioClip jump; // Clip de audio para el salto
-    [SerializeField] private AudioClip walk; // Clip de audio para el caminar
-    [SerializeField] private AudioClip crouch; // Clip de audio para el agacharse
+    [SerializeField] private AudioClip walk; // Clip de audio para caminar
+    [SerializeField] private AudioClip crouch; // Clip de audio para agacharse
 
     [Header("Player Components")]
     [SerializeField] private Rigidbody2D rb; // Referencia al Rigidbody2D para manejar la física del jugador
@@ -52,7 +57,7 @@ public class PlayerMoviement : MonoBehaviour
     /*
      * Método: Move.
      * @param context: Contexto del Input System para capturar las entradas del jugador.
-     * Descripción: Maneja el movimiento horizontal, salto y agacharse según la entrada del jugador.
+     * Descripción: Maneja el movimiento horizontal, el salto y el agacharse según la entrada del jugador.
      */
     public void Move(InputAction.CallbackContext context)
     {
@@ -69,7 +74,6 @@ public class PlayerMoviement : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             AudioManager.Instance.PlaySound(crouch);
             Crouch();
-
         }
         else
         {

@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FireDragonLifreBar_0: 2337410906494296230
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

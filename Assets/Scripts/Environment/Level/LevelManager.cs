@@ -10,11 +10,13 @@ public class LevelManager : MonoBehaviour
     [Header("Scene Settings")]
     [SerializeField] private string targetScene; // Nombre de la escena a cargar
 
+    [Header("Trigger Settings")]
     private BoxCollider2D boxCollider; // Referencia al BoxCollider2D usado como trigger
     private bool triggerState = false; // Estado inicial del trigger
 
     /*
      * Método: Start.
+     * Parámetros: Ninguno.
      * Descripción: Inicializa el estado del trigger y obtiene el BoxCollider2D.
      */
     private void Start()
@@ -36,6 +38,7 @@ public class LevelManager : MonoBehaviour
 
     /*
      * Método: UpdateTriggerState.
+     * Parámetros: Ninguno.
      * Descripción: Sincroniza el estado de triggerState con el BoxCollider2D.
      */
     private void UpdateTriggerState()
@@ -43,11 +46,6 @@ public class LevelManager : MonoBehaviour
         if (boxCollider != null)
         {
             boxCollider.isTrigger = triggerState;
-            Debug.Log($"Trigger updated: triggerState={triggerState}, isTrigger={boxCollider.isTrigger}");
-        }
-        else
-        {
-            Debug.LogError("BoxCollider2D is missing from LevelManager GameObject.");
         }
     }
 
@@ -66,6 +64,7 @@ public class LevelManager : MonoBehaviour
 
     /*
      * Método: LoadTargetScene.
+     * Parámetros: Ninguno.
      * Descripción: Cambia a la escena especificada en targetScene.
      */
     private void LoadTargetScene()
@@ -73,10 +72,6 @@ public class LevelManager : MonoBehaviour
         if (!string.IsNullOrEmpty(targetScene))
         {
             SceneManager.LoadScene(targetScene);
-        }
-        else
-        {
-            Debug.LogWarning("Target scene name is not set.");
         }
     }
 }

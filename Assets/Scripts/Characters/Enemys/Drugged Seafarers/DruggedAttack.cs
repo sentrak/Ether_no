@@ -3,22 +3,23 @@ using System.Collections;
 
 /*
  * Clase: DruggedAttack.
- * Descripción: Gestiona los ataques del enemigo, activando animaciones y controlando pausas temporales durante el movimiento.
- * Esta clase se utiliza para coordinar la ejecución de un ataque y la suspensión del movimiento asociado.
+ * Descripción: Gestiona los ataques del enemigo, activando animaciones y pausando temporalmente el movimiento.
+ * Coordina la reproducción de audio, animaciones de ataque y detención de acciones durante un intervalo.
  */
 public class DruggedAttack : MonoBehaviour
 {
     [Header("Audio Sources")]
-    [SerializeField] private AudioClip attack; // Clip de audio reproducido al atacar 
+    [SerializeField] private AudioClip attack; // Clip de audio reproducido durante el ataque
 
-    private Animator animator; // Referencia al Animator 
+    [Header("Enemy Components")]
+    private Animator animator; // Referencia al Animator del enemigo
 
     /*
      * Método: Start.
      * Parámetros: Ninguno.
-     * Descripción: Obtiene el componente Animator del GameObject al iniciar el script.
+     * Descripción: Inicializa las referencias necesarias al iniciar el script.
      */
-    void Start()
+    private void Start()
     {
         animator = GetComponent<Animator>();
     }
@@ -26,22 +27,26 @@ public class DruggedAttack : MonoBehaviour
     /*
      * Método: ExecuteAttack.
      * Parámetros: Ninguno.
-     * Descripción: Ejecuta un ataque activando el Trigger "attack" en el Animator y pausa el movimiento por un tiempo especificado.
+     * Descripción: Ejecuta el ataque del enemigo, activa el Trigger "attack" en el
+     *  Animator, reproduce un sonido y pausa el movimiento durante un tiempo especificado.
      */
     public void ExecuteAttack()
     {
         if (animator != null)
         {
             animator.SetTrigger("attack");
-            AudioManager.Instance.PlaySound(attack);
+            if (attack != null)
+            {
+                AudioManager.Instance.PlaySound(attack);
+            }
             StartCoroutine(StopMovementForSeconds(2f));
         }
     }
 
     /*
      * Método: StopMovementForSeconds.
-     * @param seconds: Tiempo en segundos durante el cual el movimiento estará detenido.
-     * Descripción: Pausa la ejecución durante el tiempo especificado.
+     * @param seconds: Tiempo en segundos durante el cual se detendrá el movimiento.
+     * Descripción: Suspende la ejecución del movimiento del enemigo durante el tiempo especificado.
      */
     public IEnumerator StopMovementForSeconds(float seconds)
     {

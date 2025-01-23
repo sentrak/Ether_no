@@ -3,34 +3,31 @@ using UnityEngine;
 
 /*
  * Clase: DragonGetHits.
- * Descripción: Maneja la detección de golpes al dragón y aplica el daño correspondiente.
+ * Descripción: Gestiona la detección de golpes al dragón, aplica daño y reproduce efectos de sonido según el tipo de ataque recibido.
  */
 public class DragonGetHits : MonoBehaviour
 {
     [Header("Audio Sources")]
-    [SerializeField] private AudioClip getHit; // Clip de audio reproducido al recibir un golpe
-    [SerializeField] private AudioClip getMagic; // Clip de audio reproducido al recibir un ataque mágico
+    [SerializeField] private AudioClip getHit; // Sonido reproducido al recibir un golpe físico
+    [SerializeField] private AudioClip getMagic; // Sonido reproducido al recibir un ataque mágico
 
-    private DragonStats dragonStats; // Referencia al script DragonStats en el GameObject padre
+    [Header("Dragon Components")]
+    private DragonStats dragonStats; // Referencia al script DragonStats para gestionar la vida del dragón
 
     /*
      * Método: Start.
-     * Descripción: Inicializa las referencias al script DragonStats y Animator desde el GameObject padre.
+     * Parámetros: Ninguno.
+     * Descripción: Inicializa las referencias necesarias y verifica la existencia del script DragonStats.
      */
-    void Start()
+    private void Start()
     {
         dragonStats = GetComponentInParent<DragonStats>();
-
-        if (dragonStats == null)
-        {
-            Debug.LogError("DragonStats script is missing on the parent object.");
-        }
     }
 
     /*
      * Método: OnTriggerEnter2D.
      * @param collision: Collider del objeto que entra en contacto.
-     * Descripción: Maneja el daño del dragón cuando recibe un golpe.
+     * Descripción: Detecta colisiones con el dragón y aplica el daño correspondiente según el tipo de ataque.
      */
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -49,7 +46,7 @@ public class DragonGetHits : MonoBehaviour
     /*
      * Método: ApplyDamage.
      * @param damage: Cantidad de daño a aplicar al dragón.
-     * Descripción: Reduce los puntos de vida del dragón y activa la animación "getHit".
+     * Descripción: Reduce los puntos de vida del dragón llamando al método TakeDamage en DragonStats.
      */
     private void ApplyDamage(int damage)
     {

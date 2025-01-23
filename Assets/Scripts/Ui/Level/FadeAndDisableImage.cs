@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 /*
  * Clase: FadeAndDisableImage.
- * Descripción: Gestiona el desvanecimiento gradual de una imagen en un Canvas y la desactiva al completar el proceso.
- *              También destruye el GameObject al final del desvanecimiento.
+ * Descripción: Gestiona el desvanecimiento gradual de una imagen en un Canvas, desactiva el componente al finalizar 
+ *              el proceso y destruye el GameObject asociado.
  */
 public class FadeAndDisableImage : MonoBehaviour
 {
@@ -28,7 +28,7 @@ public class FadeAndDisableImage : MonoBehaviour
     /*
      * Método: Start.
      * Parámetros: Ninguno.
-     * Descripción: Inicia una rutina para desvanecer la imagen después de un retraso especificado.
+     * Descripción: Inicia la rutina de desvanecimiento después de un retraso especificado.
      */
     private void Start()
     {
@@ -41,15 +41,13 @@ public class FadeAndDisableImage : MonoBehaviour
     /*
      * Método: FadeOutAndDisable.
      * Parámetros: Ninguno.
-     * Descripción: Gradualmente reduce la opacidad de la imagen hasta que desaparece y desactiva el componente.
+     * Descripción: Reduce gradualmente la opacidad de la imagen hasta que desaparezca, desactiva el componente y destruye el GameObject.
      */
     private IEnumerator FadeOutAndDisable()
     {
         yield return new WaitForSeconds(delayBeforeFade);
-
         Color originalColor = imageComponent.color;
         float elapsedTime = 0f;
-
         while (elapsedTime < fadeDuration)
         {
             elapsedTime += Time.deltaTime;
@@ -57,7 +55,6 @@ public class FadeAndDisableImage : MonoBehaviour
             imageComponent.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
             yield return null;
         }
-
         imageComponent.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);
         imageComponent.enabled = false;
         Destroy(gameObject);

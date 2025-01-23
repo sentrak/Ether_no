@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 /*
  * Clase: PlayerStats.
- * Descripción: Gestiona las estadísticas del jugador, como vida y maná, y actualiza las barras de estado
- * visuales.También maneja eventos importantes como la recuperación, reducción de vida/maná y la muerte del jugador.
+ * Descripción: Gestiona las estadísticas del jugador, incluyendo vida y maná, y actualiza las barras de estado visuales.
+ * También maneja eventos importantes como recuperación, reducción de vida/maná y la muerte del jugador.
  */
 public class PlayerStats : MonoBehaviour
 {
@@ -20,16 +20,16 @@ public class PlayerStats : MonoBehaviour
     public float health; // Vida actual del jugador
     public float mana; // Maná actual del jugador
 
-    [Header("Player stats image bar")]
-    public Image healtImg; // Imagen de la barra de vida del jugador
-    public Image ManaImg; // Imagen de la barra de maná del jugador
+    [Header("Player Stats Image Bars")]
+    [SerializeField] private Image healtImg; // Imagen de la barra de vida del jugador
+    [SerializeField] private Image ManaImg; // Imagen de la barra de maná del jugador
 
     /*
      * Método: Start.
      * Parámetros: Ninguno.
      * Descripción: Inicializa los valores de vida y maná del jugador al máximo.
      */
-    void Start()
+    private void Start()
     {
         health = maxHealth;
         mana = maxMana;
@@ -40,7 +40,7 @@ public class PlayerStats : MonoBehaviour
      * Parámetros: Ninguno.
      * Descripción: Actualiza las barras de vida y maná del jugador y maneja el evento de muerte si la vida llega a 0.
      */
-    void Update()
+    private void Update()
     {
         UpdateHealthBar();
         UpdateManaBar();
@@ -125,13 +125,13 @@ public class PlayerStats : MonoBehaviour
         mana = Mathf.Max(0, mana - amount);
     }
 
+    /*
+     * Método: Die.
+     * Parámetros: Ninguno.
+     * Descripción: Maneja la lógica de muerte del jugador, incluyendo la desactivación de movimiento y la carga de la escena de Game Over.
+     */
     public void Die()
     {
-        Debug.Log("Jugador ha muerto esta pasando por el código stats");
-        // Desactivar el movimiento del jugador
-
         SceneManager.LoadScene("05 game over");
-
     }
-
 }

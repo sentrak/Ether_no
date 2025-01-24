@@ -2351,12 +2351,22 @@ MonoBehaviour:
   - {fileID: -7154528564402915179, guid: 4ce0d62a1cc0938439aa25046ee11985, type: 3}
   - {fileID: 7605529789493939797, guid: 66cd1ec49c58be24d818342e98b227c2, type: 3}
   dialogueLines:
-  - Hola Dany Boy te estaba esperando
-  - "\xBF Por qu\xE9 sabes mi nombre ?"
-  - "Eres el elegido, la persona que va acabar con la Bruja de las adicciones. Con
-    tu f\xE9 vas a salvar a la humanidad"
-  - "Destruir\xE9 esa maldita Bruja y su maldad"
-  characterIndices: 00000000010000000000000001000000
+  - "Saludos, noble extra\xF1o. Que el Alt\xEDsimo os bendiga por vuestra valent\xEDa.
+    Esos soldados de ojos rojos, pose\xEDdos por fuerzas oscuras, me arrancaron de
+    mi camino y me trajeron aqu\xED.  "
+  - "Est\xE1 bien, tranquilo. Lo importante es que ahora est\xE1s a salvo. Aunque
+    debo decir, esos tipos tienen un gusto p\xE9simo para los secuestros.  "
+  - "Permitidme ofreceros este pan y este vino. Es todo cuanto poseo, pero conf\xEDo
+    en que el Se\xF1or lo har\xE1 suficiente para sustentaros en vuestro viaje. Que
+    Dios os gu\xEDe y os mantenga seguro.  "
+  - "Gracias, padre. Siempre se agradece un buen snack para el camino. Ahora corre,
+    porque creo que esos \"soldados de ojos rojos\" est\xE1n de vuelta para una segunda
+    ronda."
+  - "Que Dios sea vuestra fortaleza, hijo m\xEDo. Yo partir\xE9, mas rezar\xE9 por
+    vos y vuestra protecci\xF3n."
+  - " (Con una sonrisa) Agradecido, padre. Pero no te preocupes, puedo lidiar con
+    un pu\xF1ado de locos de ojos rojos. T\xFA ve y mantente fuera de problemas."
+  characterIndices: 000000000100000000000000010000000000000001000000
 --- !u!1001 &292183003
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11181,98 +11191,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 33.942574, y: 13.274534}
   m_EdgeRadius: 0
---- !u!1 &2002431026
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2002431029}
-  - component: {fileID: 2002431028}
-  - component: {fileID: 2002431027}
-  m_Layer: 0
-  m_Name: StartDialogueZone
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!61 &2002431027
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2002431026}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &2002431028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2002431026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4d8688e07ef445edaed9643c22e7834, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueScript: {fileID: 275250497}
---- !u!4 &2002431029
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2002431026}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 38.1, y: -0.2, z: -0.291865}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2003291664
 GameObject:
   m_ObjectHideFlags: 0
@@ -28415,7 +28333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6859967852283786037, guid: 1b4344d444a1f0645a179a7b3c880800, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8050333268393437542, guid: 1b4344d444a1f0645a179a7b3c880800, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28474,6 +28392,10 @@ PrefabInstance:
       propertyPath: tp
       value: 
       objectReference: {fileID: 142662421}
+    - target: {fileID: 267309433490450409, guid: 088caa4a58b94cb428bfebc6b9460ed4, type: 3}
+      propertyPath: dialogueScript
+      value: 
+      objectReference: {fileID: 275250497}
     - target: {fileID: 267309433490450409, guid: 088caa4a58b94cb428bfebc6b9460ed4, type: 3}
       propertyPath: playerMoviement
       value: 
@@ -28635,4 +28557,3 @@ SceneRoots:
   - {fileID: 21046048}
   - {fileID: 482197148}
   - {fileID: 1325982535}
-  - {fileID: 2002431029}

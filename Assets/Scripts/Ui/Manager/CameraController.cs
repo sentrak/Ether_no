@@ -59,7 +59,7 @@ public class CameraControllerWithVerticalMovement : MonoBehaviour
 
         Vector3 clampedPos = new Vector3(
             Mathf.Clamp(player.position.x, minPosX, maxPosX),
-            Mathf.Clamp(newY, minPosY, maxPosY),
+            Mathf.Clamp(player.position.y, minPosY, maxPosY),
             transform.position.z
         );
 

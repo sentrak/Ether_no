@@ -74,6 +74,8 @@ public class DragonStats : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         Destroy(gameObject);
+        Destroy(healtImg);
+        
     }
 
     /*

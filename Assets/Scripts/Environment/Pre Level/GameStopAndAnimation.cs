@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
 /*
@@ -9,92 +10,53 @@ using UnityEngine.SceneManagement;
 public class GameStopAndAnimation : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private GameObject player; // Referencia al jugador
-    [SerializeField] private GameObject witch; // Referencia a la bruja
-    [SerializeField] private Transform portal; // Referencia al portal
+    [SerializeField]
+    private GameObject player; // Referencia al jugador
+    private BoxCollider2D boxCollider; // Referencia al collider
 
-    [Header("Audio Settings")]
-    [SerializeField] private AudioClip portalSound; // Sonido del portal
-    [SerializeField] private AudioClip laugthWitch; // Sonido de risa de la bruja
+    [Header("Dialog Settings")]
+    [SerializeField]
+    private DialogueScript dialogueScript; // Referencia al script de diálogo
 
-    [Header("Settings")]
-    [SerializeField] private float witchMoveDistance = 10f; // Distancia que se moverá la bruja a la derecha
-    [SerializeField] private float playerWalkSpeed = 2f; // Velocidad con la que el jugador caminará hacia el portal
+    [Header("Audio Sources")]
+    [SerializeField]
+    private AudioClip portaSFX; // Clip de audio de portal
 
-    private AddictionWitchCircularMovement witchMovement; // Referencia al script de movimiento circular de la bruja
-    private Animator playerAnimator; // Referencia al Animator del jugador
+    [Header("Cinematic Settings")]
+    [SerializeField]
+    private PlayableDirector playableDirector; // Referencia al PlayableDirector para manejar la cinemática
 
-    /*
-     * Método: Start.
-     * Parámetros: Ninguno.
-     * Descripción: Inicializa las referencias necesarias, incluyendo el Animator del jugador.
-     */
-    private void Start()
+    void Start()
     {
-        playerAnimator = player.GetComponent<Animator>();
+        boxCollider = GetComponent<BoxCollider2D>();
     }
 
-    /*
-     * Método: OnTriggerEnter2D.
-     * @param collision: Collider del objeto que entra en el trigger.
-     * Descripción: Detiene el movimiento del tiempo, activa la secuencia y maneja la interacción con el jugador.
-     */
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            witchMovement = witch.GetComponent<AddictionWitchCircularMovement>();
-            if (witchMovement != null)
-            {
-                witchMovement.isAnimating = true;
-            }
-            StartCoroutine(HandleCollision());
+            // Iniciar el diálogo
+            dialogueScript.StartDialogue();
+            StartCoroutine(dialogContinuo());
+            boxCollider.enabled = false;
         }
     }
 
-    /*
-     * Método: HandleCollision.
-     * Parámetros: Ninguno.
-     * Descripción: Detiene el tiempo del juego, mueve la bruja, destruye la bruja, reproduce sonidos y mueve al jugador hacia el portal.
-     */
-    private IEnumerator HandleCollision()
+    private IEnumerator dialogContinuo()
     {
-        Time.timeScale = 0f; 
-        AudioManager.Instance.PlaySound(laugthWitch); 
-        Vector3 targetPosition = witch.transform.position + Vector3.right * witchMoveDistance;
-        while (Vector3.Distance(witch.transform.position, targetPosition) > 0.1f)
+        while (!dialogueScript.isFinished)
         {
-            witch.transform.position = Vector3.MoveTowards(witch.transform.position, targetPosition, 5 * Time.unscaledDeltaTime);
-            yield return null;
+            yield return null; // Esperar un frame
         }
-        yield return new WaitForSecondsRealtime(1f);
-        Destroy(witch);
-        AudioManager.Instance.PlaySound(portalSound); 
+        playableDirector.Play();
+        AudioManager.Instance.PlaySound(portaSFX);
+        playableDirector.stopped += OnTimelineStopped;
+        AudioManager.Instance.PlaySound(portaSFX);
 
-        if (playerAnimator != null)
-        {
-            playerAnimator.SetBool("isRunning", true);
-        }
-        yield return StartCoroutine(MovePlayerToPortal());
-        if (playerAnimator != null)
-        {
-            playerAnimator.SetBool("isRunning", false);
-        }
-        Time.timeScale = 1f; 
-        SceneManager.LoadScene("03 Level02"); 
     }
 
-    /*
-     * Método: MovePlayerToPortal.
-     * Parámetros: Ninguno.
-     * Descripción: Mueve al jugador suavemente hacia el portal.
-     */
-    private IEnumerator MovePlayerToPortal()
+    private void OnTimelineStopped(PlayableDirector director)
     {
-        while (Vector3.Distance(player.transform.position, portal.position) > 0.1f)
-        {
-            player.transform.position = Vector3.MoveTowards(player.transform.position, portal.position, playerWalkSpeed * Time.unscaledDeltaTime);
-            yield return null;
-        }
+        SceneManager.LoadScene("03 Level02");
     }
 }

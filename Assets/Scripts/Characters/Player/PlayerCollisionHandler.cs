@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /*
  * Clase: PlayerCollisionHandler.
@@ -41,7 +42,8 @@ public class PlayerCollisionHandler : MonoBehaviour
             }
             if (playerStats != null)
             {
-                playerStats.Die();
+                SceneManager.LoadScene("02 Level01");
+
             }
         }
     }

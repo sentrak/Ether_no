@@ -63,7 +63,6 @@ public class Projectile : MonoBehaviour
     {
         if (collision.CompareTag("Player") || collision.CompareTag("PlayerHitArea"))
         {
-            Debug.Log("Projectile hit the Player!");
             poolManager.ReturnToPool(gameObject);
         }
     }

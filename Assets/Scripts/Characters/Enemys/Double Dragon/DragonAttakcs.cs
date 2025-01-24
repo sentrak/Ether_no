@@ -21,13 +21,6 @@ public class DragonAttakcs : MonoBehaviour
     {
         status = DragonStatus.IDLE;
         anim = GetComponent<Animator>();
-
-        // Validación de la referencia al sistema de proyectiles
-        if (projectilePooling == null)
-        {
-            Debug.LogError("ProjectilePooling is not assigned in DragonAttacks.");
-        }
-
         StartCoroutine(DragonStatuses());
     }
 
@@ -54,7 +47,6 @@ public class DragonAttakcs : MonoBehaviour
                 anim.SetTrigger("attack");
                 StartCoroutine(DragonStatuses());
                 SpawnFireballs(); 
-                Debug.Log("Si activó");
                 break;
 
             case DragonStatus.SPECIAL:
@@ -66,6 +58,7 @@ public class DragonAttakcs : MonoBehaviour
 
     private void SpawnFireballs()
     {
+        AudioManager.Instance.SetSFXVolume(1);
         AudioManager.Instance.PlaySound(projectile);
             projectilePooling.SpawnProjectile();
         

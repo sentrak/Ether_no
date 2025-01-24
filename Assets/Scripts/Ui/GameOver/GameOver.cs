@@ -56,7 +56,7 @@ public class GameOver : MonoBehaviour
     {
         AudioManager.Instance.PlaySound(clickbottom);
         AudioManager.Instance.StopMusic();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameManager.Instance.LoadLastScene();
     }
 
     /*

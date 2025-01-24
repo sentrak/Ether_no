@@ -14,8 +14,7 @@ TagManager:
   - Props
   - Spikes
   - Fire
-  - Lightning
-  - Ligthing
+  - Thunder
   layers:
   - Default
   - TransparentFX

@@ -43,7 +43,7 @@ public class PlayerGetHits : MonoBehaviour
         {
             HandleHit(20, collision);
         }
-        else if (collision.CompareTag("Lightning"))
+        else if (collision.CompareTag("Thunder"))
         {
             HandleHit(20, collision);
         }

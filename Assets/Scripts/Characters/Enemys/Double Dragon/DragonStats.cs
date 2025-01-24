@@ -23,7 +23,7 @@ public class DragonStats : MonoBehaviour
     {
         enemy = GetComponent<Enemy>();
         animator = GetComponent<Animator>();
-            enemy.healtPoints = enemy.MaxHealtPoints;
+        enemy.healtPoints = enemy.MaxHealtPoints;
     }
 
     /*
@@ -60,7 +60,7 @@ public class DragonStats : MonoBehaviour
      */
     private void Die()
     {
-        Debug.Log("Dragon has died.");
+        Destroy(healtImg);
         animator.SetTrigger("dead");
         StartCoroutine(DestroyAfterDelay(3.5f));
     }
@@ -74,8 +74,6 @@ public class DragonStats : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         Destroy(gameObject);
-        Destroy(healtImg);
-        
     }
 
     /*

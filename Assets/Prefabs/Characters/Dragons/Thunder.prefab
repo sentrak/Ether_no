@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 1318466945333966022}
   - component: {fileID: 1331110479923298580}
   m_Layer: 0
-  m_Name: Lighting
-  m_TagString: Ligthing
+  m_Name: Thunder
+  m_TagString: Thunder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,7 +142,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -170,4 +170,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 930a5b8a69c3c9c4fabf0c83653425b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1691000710630674365, guid: e9d3f9d499d39a64daf419ec20125cf3, type: 3}

@@ -16,6 +16,7 @@ public class ContextWorld : MonoBehaviour
      */
     private void Start()
     {
+         GameManager.Instance.SaveScene(); // Guarda la escena actual
         if (levelMusic != null)
         {
             AudioManager.Instance.PlayMusic(levelMusic);

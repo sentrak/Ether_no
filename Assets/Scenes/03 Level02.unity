@@ -28430,7 +28430,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6859967852283786037, guid: 1b4344d444a1f0645a179a7b3c880800, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8050333268393437542, guid: 1b4344d444a1f0645a179a7b3c880800, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28629,12 +28629,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7801826215319366831, guid: e9d3f9d499d39a64daf419ec20125cf3, type: 3}
       propertyPath: jumpingPower
-      value: 17
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 7827878081965503355, guid: e9d3f9d499d39a64daf419ec20125cf3, type: 3}
       propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2025187061}
+    - target: {fileID: 8768206692169039423, guid: e9d3f9d499d39a64daf419ec20125cf3, type: 3}
+      propertyPath: knockBackForceX
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8768206692169039423, guid: e9d3f9d499d39a64daf419ec20125cf3, type: 3}
+      propertyPath: knockBackForceY
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

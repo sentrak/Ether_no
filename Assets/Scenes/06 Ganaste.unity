@@ -164,9 +164,9 @@ MonoBehaviour:
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: 58ef504b809f331499d3e3884754a3bf, type: 2}
+  m_PanelSettings: {fileID: 11400000, guid: 95d63abe7d091af428fa07263fc45248, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 6dd9c0c24840a794c81efe0a53e031b3, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: 1d2d22b83738ee74fa5918b58c73f704, type: 3}
   m_SortingOrder: 0
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
@@ -180,12 +180,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 289074151}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62b6a83636820d444a61d8e232fe6d20, type: 3}
+  m_Script: {fileID: 11500000, guid: aad54e2d3676f3047b43e0bd3aa45b80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titleTheme: {fileID: 8300000, guid: 320b8f78d64c1bb469882db1cc5cff36, type: 3}
-  hoverbottom: {fileID: 8300000, guid: d4ad6549508739e4b992194f538a54fa, type: 3}
-  clickbottom: {fileID: 8300000, guid: c5e69ace8a105384cb527fc47ccdf050, type: 3}
+  titleTheme: {fileID: 0}
+  hoverbottom: {fileID: 0}
+  clickbottom: {fileID: 0}
 --- !u!1 &1513619270
 GameObject:
   m_ObjectHideFlags: 0

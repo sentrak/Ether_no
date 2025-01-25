@@ -92,6 +92,7 @@ public class FriarInteraction : MonoBehaviour
     private IEnumerator MoveAndDestroy()
     {
         AudioManager.Instance.PlaySound(walk);
+        animator?.SetBool("run", true);
         Vector3 targetPosition = transform.position + Vector3.right * moveDistance;
 
         while (Vector3.Distance(transform.position, targetPosition) > 0.1f)
@@ -103,13 +104,11 @@ public class FriarInteraction : MonoBehaviour
             );
             yield return null;
         }
-
-        animator?.SetBool("run", false);
+        this.enabled = false;
         SpawnPrefabs();
         levelManager.SetTriggerState(true);
-
         playerMoviement.IsUsingSkill = false;
-        Destroy(gameObject);
+        
     }
 
     private void SpawnPrefabs()

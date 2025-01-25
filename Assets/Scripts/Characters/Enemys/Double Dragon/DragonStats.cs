@@ -14,6 +14,10 @@ public class DragonStats : MonoBehaviour
 
     [Header("UI Settings")]
     [SerializeField] private Image healtImg; // Imagen de la barra de vida del dragón
+
+    [Header("Settings")]
+    [SerializeField] private string dragonType; // Identificador para diferenciar el dragón ("fire" o "electric")
+
     /*
      * Método: Start.
      * Parámetros: Ninguno.
@@ -62,7 +66,25 @@ public class DragonStats : MonoBehaviour
     {
         Destroy(healtImg);
         animator.SetTrigger("dead");
+        NotifyDragonDeath();
         StartCoroutine(DestroyAfterDelay(3.5f));
+    }
+
+    /*
+     * Método: NotifyDragonDeath.
+     * Parámetros: Ninguno.
+     * Descripción: Notifica al Singleton que este dragón ha muerto.
+     */
+    private void NotifyDragonDeath()
+    {
+        if (dragonType.ToLower() == "fire")
+        {
+            DragonDeathManager.Instance.SetDragonDead();
+        }
+        else if (dragonType.ToLower() == "electric")
+        {
+            DragonDeathManager.Instance.SetElectricDragonDead();
+        }
     }
 
     /*

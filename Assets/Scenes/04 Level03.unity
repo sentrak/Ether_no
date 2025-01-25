@@ -4112,6 +4112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 258453963}
   - component: {fileID: 258453964}
+  - component: {fileID: 258453965}
   m_Layer: 0
   m_Name: ContextWorld
   m_TagString: Untagged
@@ -4147,6 +4148,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelMusic: {fileID: 8300000, guid: 8c26866bd873b244899d08b41adf1711, type: 3}
+--- !u!114 &258453965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258453962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d1b850056728ee40b5888c0165dc5c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextSceneName: 06 Ganaste
 --- !u!1 &259278074
 GameObject:
   m_ObjectHideFlags: 0
@@ -55499,6 +55513,14 @@ PrefabInstance:
       propertyPath: jumpingPower
       value: 17
       objectReference: {fileID: 0}
+    - target: {fileID: 8768206692169039423, guid: e9d3f9d499d39a64daf419ec20125cf3, type: 3}
+      propertyPath: knockBackForceX
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8768206692169039423, guid: e9d3f9d499d39a64daf419ec20125cf3, type: 3}
+      propertyPath: knockBackForceY
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -62006,10 +62028,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1808983533}
     m_Modifications:
+    - target: {fileID: 1675508787591661322, guid: da73aa806ee12bd4ca1373d024fe7538, type: 3}
+      propertyPath: healtPoints
+      value: 250
+      objectReference: {fileID: 0}
     - target: {fileID: 2020801108009948440, guid: da73aa806ee12bd4ca1373d024fe7538, type: 3}
       propertyPath: healtImg
       value: 
       objectReference: {fileID: 1781092928}
+    - target: {fileID: 2020801108009948440, guid: da73aa806ee12bd4ca1373d024fe7538, type: 3}
+      propertyPath: dragonType
+      value: electric
+      objectReference: {fileID: 0}
     - target: {fileID: 4521828359212431481, guid: da73aa806ee12bd4ca1373d024fe7538, type: 3}
       propertyPath: m_LocalPosition.x
       value: 79.86035
@@ -63033,6 +63063,14 @@ PrefabInstance:
       propertyPath: healtImg
       value: 
       objectReference: {fileID: 1559270459}
+    - target: {fileID: 7291335848361655387, guid: 14bcf6efa1404344d8a8741bb1215830, type: 3}
+      propertyPath: dragonType
+      value: fire
+      objectReference: {fileID: 0}
+    - target: {fileID: 7961184268334313033, guid: 14bcf6efa1404344d8a8741bb1215830, type: 3}
+      propertyPath: healtPoints
+      value: 250
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
